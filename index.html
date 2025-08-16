@@ -27,51 +27,28 @@
   <!-- Il tuo script principale -->
   <script>
     window.onload = function() {
-      console.log('Page loaded, starting map initialization...');
-      
       // Token Mapbox
-      mapboxgl.accessToken = "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
-      console.log('Mapbox token set');
+      mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw";
 
-      try {
-        // Creazione mappa
-        console.log('Creating map...');
-        const map = new mapboxgl.Map({
-          container: "map",
-          style: "mapbox://styles/mapbox/streets-v11",
-          center: [12.4964, 41.9028], // Roma centro
-          zoom: 11
+      // Creazione mappa
+      const map = new mapboxgl.Map({
+        container: "map",
+        style: "mapbox://styles/mapbox/streets-v11",
+        center: [12.4964, 41.9028], // Roma centro
+        zoom: 11
+      });
+
+      // Controlli mappa (zoom e rotazione)
+      map.addControl(new mapboxgl.NavigationControl());
+
+      // Aggiunta marker dai luoghi (se esiste il file luoghi.js)
+      if (window.PLACES) {
+        window.PLACES.forEach(place => {
+          new mapboxgl.Marker()
+            .setLngLat(place.coords)
+            .setPopup(new mapboxgl.Popup().setHTML(`<b>${place.name}</b><br>${place.desc}`))
+            .addTo(map);
         });
-        console.log('Map created successfully');
-
-        // Controlli mappa (zoom e rotazione)
-        map.addControl(new mapboxgl.NavigationControl());
-        console.log('Navigation controls added');
-
-        // Event listener per quando la mappa è caricata
-        map.on('load', function() {
-          console.log('Map loaded successfully!');
-        });
-
-        map.on('error', function(e) {
-          console.error('Map error:', e);
-        });
-
-        // Aggiunta marker dai luoghi (se esiste il file luoghi.js)
-        if (window.PLACES) {
-          console.log('Adding markers for', window.PLACES.length, 'places');
-          window.PLACES.forEach(place => {
-            new mapboxgl.Marker()
-              .setLngLat(place.coords)
-              .setPopup(new mapboxgl.Popup().setHTML(`<b>${place.name}</b><br>${place.desc}`))
-              .addTo(map);
-          });
-          console.log('All markers added');
-        } else {
-          console.log('No PLACES data found');
-        }
-      } catch (error) {
-        console.error('Error initializing map:', error);
       }
     };
   </script>
