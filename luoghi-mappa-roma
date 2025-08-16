@@ -1,0 +1,1502 @@
+const PLACES = [
+  {
+    "name": "Colosseo",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 13",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 14",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 15",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 16",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 17",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 18",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 19",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 20",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 21",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 22",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 23",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 24",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 25",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 26",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 27",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 28",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 29",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 30",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 31",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 32",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 33",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 34",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 35",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 36",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 37",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 38",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 39",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 40",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 41",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 42",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 43",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 44",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 45",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 46",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 47",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 48",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 49",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 50",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 51",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 52",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 53",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 54",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 55",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 56",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 57",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 58",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 59",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 60",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 61",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 62",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 63",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 64",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 65",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 66",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 67",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 68",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 69",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 70",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 71",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 72",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 73",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 74",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 75",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 76",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 77",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 78",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 79",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 80",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 81",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 82",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 83",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 84",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 85",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 86",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 87",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 88",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 89",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 90",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 91",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 92",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 93",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 94",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 95",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 96",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 97",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 98",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 99",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 100",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 101",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 102",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 103",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 104",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 105",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 106",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 107",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 108",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 109",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 110",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 111",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 112",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 113",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 114",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 115",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 116",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 117",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 118",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 119",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 120",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 121",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 122",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 123",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 124",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 125",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 126",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 127",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 128",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 129",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 130",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 131",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 132",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 133",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 134",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 135",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 136",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  },
+  {
+    "name": "Villa Borghese 137",
+    "coords": [
+      41.9142,
+      12.4923
+    ],
+    "category": "Parchi",
+    "color": "#228b22",
+    "icon": "🌳"
+  },
+  {
+    "name": "MAXXI 138",
+    "coords": [
+      41.927,
+      12.466
+    ],
+    "category": "Musei",
+    "color": "#ff8c00",
+    "icon": "🖼️"
+  },
+  {
+    "name": "Teatro dell'Opera 139",
+    "coords": [
+      41.901,
+      12.495
+    ],
+    "category": "Teatri",
+    "color": "#4169e1",
+    "icon": "🎭"
+  },
+  {
+    "name": "Trastevere Bar San Calisto 140",
+    "coords": [
+      41.889,
+      12.47
+    ],
+    "category": "Bar",
+    "color": "#2e8b57",
+    "icon": "☕"
+  },
+  {
+    "name": "Circolo degli Artisti 141",
+    "coords": [
+      41.887,
+      12.511
+    ],
+    "category": "Club",
+    "color": "#ff1493",
+    "icon": "🎶"
+  },
+  {
+    "name": "Roscioli Ristorante 142",
+    "coords": [
+      41.894,
+      12.475
+    ],
+    "category": "Ristoranti",
+    "color": "#ff4500",
+    "icon": "🍝"
+  },
+  {
+    "name": "Colosseo 143",
+    "coords": [
+      41.8902,
+      12.4922
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Pantheon 144",
+    "coords": [
+      41.8986,
+      12.4769
+    ],
+    "category": "Monumenti",
+    "color": "#1e90ff",
+    "icon": "🏛️"
+  },
+  {
+    "name": "Piazza Navona 145",
+    "coords": [
+      41.8992,
+      12.4731
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "Fontana di Trevi 146",
+    "coords": [
+      41.9009,
+      12.4833
+    ],
+    "category": "Piazze",
+    "color": "#ffd700",
+    "icon": "🟨"
+  },
+  {
+    "name": "San Pietro 147",
+    "coords": [
+      41.9022,
+      12.4534
+    ],
+    "category": "Chiese",
+    "color": "#800080",
+    "icon": "✝️"
+  },
+  {
+    "name": "Catacombe di San Sebastiano 148",
+    "coords": [
+      41.8571,
+      12.5119
+    ],
+    "category": "Underground",
+    "color": "#000000",
+    "icon": "🕳️"
+  },
+  {
+    "name": "Shari Vari Playhouse 149",
+    "coords": [
+      41.8959,
+      12.4776
+    ],
+    "category": "Nightlife",
+    "color": "#dc143c",
+    "icon": "🍻"
+  }
+];
