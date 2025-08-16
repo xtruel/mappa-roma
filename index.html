@@ -27,19 +27,46 @@
   <!-- Il tuo script principale -->
   <script>
     window.onload = function() {
-      // Token Mapbox
-      mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw";
+      // Token Mapbox (usa il tuo token valido da mapbox.com)
+      mapboxgl.accessToken = "pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
 
       // Creazione mappa
       const map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/streets-v11",
+        style: "mapbox://styles/mapbox/outdoors-v12",
         center: [12.4964, 41.9028], // Roma centro
-        zoom: 11
+        zoom: 11,
+        pitch: 45, // Angolo di inclinazione per vista 3D
+        bearing: 0 // Rotazione della mappa
       });
 
       // Controlli mappa (zoom e rotazione)
       map.addControl(new mapboxgl.NavigationControl());
+
+      // Aggiunta del terreno 3D quando la mappa è caricata
+      map.on('style.load', () => {
+        // Aggiunta della fonte del terreno
+        map.addSource('mapbox-dem', {
+          'type': 'raster-dem',
+          'url': 'mapbox://mapbox.mapbox-terrain-dem-v1',
+          'tileSize': 512,
+          'maxzoom': 14
+        });
+        
+        // Impostazione del terreno 3D
+        map.setTerrain({ 'source': 'mapbox-dem', 'exaggeration': 1.5 });
+        
+        // Aggiunta del layer del cielo per effetto 3D
+        map.addLayer({
+          'id': 'sky',
+          'type': 'sky',
+          'paint': {
+            'sky-type': 'atmosphere',
+            'sky-atmosphere-sun': [0.0, 0.0],
+            'sky-atmosphere-sun-intensity': 15
+          }
+        });
+      });
 
       // Aggiunta marker dai luoghi (se esiste il file luoghi.js)
       if (window.PLACES) {
