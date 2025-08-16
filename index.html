@@ -1,82 +1,30 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mappa Roma</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
-  <style>
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: Arial, sans-serif;
-      display: flex;
-      height: 100vh;
-    }
-    #sidebar {
-      width: 250px;
-      background-color: #800000;
-      color: white;
-      padding: 20px;
-      overflow-y: auto;
-    }
-    #sidebar img {
-      max-width: 100%;
-      margin-bottom: 15px;
-    }
-    #sidebar h1 {
-      font-size: 20px;
-      margin: 0 0 20px 0;
-    }
-    #map {
-      flex: 1;
-      height: 100%;
-    }
-    .marker {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
-      border: 2px solid white;
-    }
-  </style>
+
+  <!-- CSS personalizzato -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Libreria Mapbox -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
 </head>
 <body>
+  <!-- Sidebar -->
   <div id="sidebar">
-    <img src="assets/logo-roma.png" alt="Logo Roma">
-    <h1>Mappa Roma</h1>
-    <p>Scopri monumenti, chiese, piazze, club e vita notturna di Roma ⚜️</p>
+    <img src="logo.png" alt="Logo Roma" class="logo" />
+    <h2>Mappa Roma</h2>
+    <p>Scopri più di 100 luoghi iconici, nascosti e underground della Capitale!</p>
   </div>
+
+  <!-- Mappa -->
   <div id="map"></div>
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-  <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lYnowZ3ZuMGN2YjJrcGxpZzlld3RnZSJ9.PdSpj6URxZSU3GWvgvFwRA';
-    const map = new mapboxgl.Map({
-      container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v11',
-      center: [12.4964, 41.9028],
-      zoom: 12
-    });
-  </script>
+
+  <!-- Script con i dati dei luoghi -->
+  <script src="places.js"></script>
   <script src="luoghi-mappa-roma.js"></script>
-  <script>
-    if (typeof PLACES !== "undefined") {
-      PLACES.forEach(place => {
-        const el = document.createElement('div');
-        el.className = 'marker';
-        el.style.backgroundColor = place.color || '#FFD700';
-        el.textContent = place.icon || '•';
-        new mapboxgl.Marker(el)
-          .setLngLat([place.coords[1], place.coords[0]])
-          .setPopup(new mapboxgl.Popup().setHTML(`<b>${place.name}</b><br>${place.category}`))
-          .addTo(map);
-      });
-    }
-  </script>
 </body>
 </html>
