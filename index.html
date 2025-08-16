@@ -7,41 +7,41 @@
 
   <!-- CSS di Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
+
   <!-- Il tuo CSS personalizzato -->
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
   <!-- Sidebar -->
   <aside id="sidebar">
-    <h2>Mappa Roma</h2>
+    <h1>Mappa Roma</h1>
     <p>Luoghi iconici e underground di Roma</p>
   </aside>
 
-  <!-- Contenitore mappa -->
+  <!-- Contenitore della mappa -->
   <div id="map"></div>
 
-  <!-- Script di Mapbox -->
+  <!-- JS di Mapbox -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+
+  <!-- Script per la mappa -->
   <script>
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw';
+    mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw";
 
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'https://api.mapbox.com/styles/v1/furieromane/cmeeejl8900iu01s62io48hha?access_token=pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw',
-      center: [12.4964, 41.9028], // Roma centro
+      style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha', // stile tuo
+      center: [12.4964, 41.9028], // Roma (long, lat)
       zoom: 11
     });
 
-    // Marker di esempio - Colosseo
-    new mapboxgl.Marker()
-      .setLngLat([12.4922, 41.8902])
-      .setPopup(new mapboxgl.Popup().setHTML("<b>Colosseo</b><br>Icona di Roma"))
-      .addTo(map);
+    // Aggiunge controlli zoom/rotazione
+    map.addControl(new mapboxgl.NavigationControl());
 
-    // Marker di esempio - Trastevere
-    new mapboxgl.Marker({ color: "red" })
-      .setLngLat([12.4663, 41.8896])
-      .setPopup(new mapboxgl.Popup().setHTML("<b>Trastevere</b><br>Quartiere storico e notturno"))
+    // Esempio marker
+    new mapboxgl.Marker()
+      .setLngLat([12.4924, 41.8902]) // Colosseo
+      .setPopup(new mapboxgl.Popup().setHTML("<b>Colosseo</b><br>Icona di Roma"))
       .addTo(map);
   </script>
 </body>
