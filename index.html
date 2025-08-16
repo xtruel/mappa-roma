@@ -2,52 +2,50 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Mappa Roma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mappa Roma</title>
 
   <!-- Mapbox CSS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
-
-  <!-- Stile personalizzato -->
-  <link rel="stylesheet" href="style.css">
+  <!-- Stile custom -->
+  <link href="style.css" rel="stylesheet">
 </head>
 <body>
+  <!-- Sidebar -->
   <div id="sidebar">
-    <h1>Mappa Roma</h1>
+    <h2>Mappa Roma</h2>
     <p>Luoghi iconici e underground di Roma</p>
   </div>
 
+  <!-- Mappa -->
   <div id="map"></div>
 
-  <!-- 1. Libreria Mapbox -->
+  <!-- Mapbox JS -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
-
-  <!-- 2. Codice mappa -->
+  <!-- File con i luoghi -->
+  <script src="luoghi.js"></script>
   <script>
+    // Token Mapbox (puoi cambiarlo con il tuo personale)
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA';
 
+    // Inizializza la mappa
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
       center: [12.4964, 41.9028], // Roma
-      zoom: 11
+      zoom: 12
     });
 
-    // Controlli di navigazione (zoom e rotazione)
+    // Aggiungi controlli di zoom
     map.addControl(new mapboxgl.NavigationControl());
 
-    // Se esistono luoghi definiti in luoghi.js, aggiungili
-    if (typeof PLACES !== 'undefined') {
-      PLACES.forEach(p => {
-        new mapboxgl.Marker()
-          .setLngLat(p.coords)
-          .setPopup(new mapboxgl.Popup().setHTML(`<h3>${p.name}</h3>`))
-          .addTo(map);
-      });
-    }
+    // Aggiungi i luoghi dal file luoghi.js
+    luoghi.forEach(luogo => {
+      new mapboxgl.Marker()
+        .setLngLat(luogo.coords)
+        .setPopup(new mapboxgl.Popup().setHTML(`<h3>${luogo.nome}</h3><p>${luogo.descrizione}</p>`))
+        .addTo(map);
+    });
   </script>
-
-  <!-- 3. File con i luoghi -->
-  <script src="luoghi.js"></script>
 </body>
 </html>
