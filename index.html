@@ -1,0 +1,73 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+}
+header {
+  background: #800000;
+  color: white;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 18px;
+  font-weight: bold;
+}
+.logo {
+  height: 40px;
+}
+#map {
+  position: absolute;
+  top: 60px;
+  bottom: 0;
+  width: 100%;
+}
+const MAP_CONFIG = {
+  accessToken: "INSERISCI_IL_TUO_MAPBOX_TOKEN",
+  style: "mapbox://styles/mapbox/streets-v12",
+  center: [12.4964, 41.9028],
+  zoom: 12,
+  categories: [
+    { name: "Ristoranti", color: "#ff6347", icon: "🍝" },
+    { name: "Monumenti", color: "#1e90ff", icon: "🏛️" },
+    { name: "Piazze", color: "#32cd32", icon: "🏟️" }
+  ]
+};
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mappa Roma</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+</head>
+<body>
+  <header>
+    <img src="logo-roma.svg" alt="Logo Roma" class="logo">
+    <span>Mappa Roma</span>
+  </header>
+  <div id="map"></div>
+  <script src="config.js"></script>
+  <script>
+    mapboxgl.accessToken = MAP_CONFIG.accessToken;
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: MAP_CONFIG.style,
+      center: MAP_CONFIG.center,
+      zoom: MAP_CONFIG.zoom
+    });
+    map.addControl(new mapboxgl.NavigationControl());
+    MAP_CONFIG.categories.forEach(cat => {
+      new mapboxgl.Marker({ color: cat.color })
+        .setLngLat(MAP_CONFIG.center)
+        .setPopup(new mapboxgl.Popup().setText(cat.name))
+        .addTo(map);
+    });
+  </script>
+</body>
+</html>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <circle cx="100" cy="100" r="95" fill="#800000" stroke="gold" stroke-width="5"/>
+  <text x="50%" y="55%" font-size="60" text-anchor="middle" fill="white" font-family="Arial" dy=".3em">ROMA</text>
+</svg>
