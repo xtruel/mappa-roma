@@ -3,34 +3,43 @@
 <head>
   <meta charset="UTF-8">
   <title>Mappa Roma</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- Mapbox CSS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
-  <link href="style.css" rel="stylesheet">
 </head>
 <body>
-  <aside id="sidebar">
-    <h1>Mappa Roma</h1>
+  <div id="sidebar">
+    <h2>Mappa Roma</h2>
     <p>Luoghi iconici e underground di Roma</p>
-  </aside>
+  </div>
   <div id="map"></div>
 
-  <!-- JS Mapbox -->
+  <!-- Mapbox JS -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
-  <!-- Luoghi -->
+
+  <!-- File con i luoghi (assicurati che il file si chiami esattamente luoghi.js e sia nello stesso repo) -->
   <script src="luoghi.js"></script>
 
+  <!-- Script principale -->
   <script>
     window.onload = function() {
       mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw";
 
       const map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/streets-v11",
-        center: [12.4964, 41.9028], // Roma
+        style: "mapbox://styles/mapbox/streets-v11", 
+        center: [12.4964, 41.9028], // Roma centro
         zoom: 11
       });
 
+      // Controlli base (zoom, rotazione)
       map.addControl(new mapboxgl.NavigationControl());
 
+      // Aggiunta marker dai dati in luoghi.js
       if (window.PLACES) {
         window.PLACES.forEach(place => {
           new mapboxgl.Marker()
