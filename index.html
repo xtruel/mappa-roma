@@ -5,10 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mappa Roma</title>
 
-  <!-- Mapbox CSS -->
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
+  <!-- Mapbox CSS FIX -->
+  <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
 
-  <!-- Stile base -->
+  <!-- Stile personalizzato -->
   <style>
     body, html {
       margin: 0;
@@ -17,56 +17,46 @@
       font-family: Arial, sans-serif;
       display: flex;
     }
-
-    /* Sidebar */
     #sidebar {
-      width: 300px;
-      background: linear-gradient(to bottom, #8B0000, #FFD700);
+      width: 250px;
+      background: linear-gradient(to bottom, #800000, #ffcc00);
       color: white;
       padding: 20px;
       box-sizing: border-box;
     }
-
-    #sidebar h1 {
-      margin: 0;
-      font-size: 24px;
-    }
-
-    /* Contenitore mappa */
     #map {
-      flex-grow: 1;
-      height: 100%;
+      flex: 1;
+    }
+    h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
     }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
+
   <div id="sidebar">
     <h1>Mappa Roma</h1>
     <p>Luoghi iconici e underground di Roma</p>
   </div>
-
-  <!-- Mappa -->
   <div id="map"></div>
 
-  <!-- Mapbox JS -->
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+  <!-- Mapbox JS FIX -->
+  <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
 
-  <!-- Luoghi -->
-  <script src="luoghi.js"></script>
-
-  <!-- Script principale -->
+  <!-- Token Mapbox -->
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA';
 
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
-      center: [12.4964, 41.9028], // Roma centro
+      center: [12.4964, 41.9028], // Roma
       zoom: 12
     });
+  </script>
 
-    // Aggiunge i luoghi dal file luoghi.js
-    PLACES.forEach(place => {
-      new mapboxgl.Marker()
-        .setLngLat(place.
+  <!-- File con i luoghi -->
+  <script src="luoghi.js"></script>
+</body>
+</html>
