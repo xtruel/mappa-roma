@@ -5,10 +5,10 @@
   <title>Mappa Roma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS di Mapbox -->
+  <!-- CSS Mapbox dal CDN -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
 
-  <!-- Il tuo CSS personalizzato -->
+  <!-- Il tuo CSS -->
   <link href="style.css" rel="stylesheet">
 </head>
 <body>
@@ -18,31 +18,34 @@
     <p>Luoghi iconici e underground di Roma</p>
   </aside>
 
-  <!-- Contenitore della mappa -->
+  <!-- Div della mappa -->
   <div id="map"></div>
 
-  <!-- JS di Mapbox -->
+  <!-- Script Mapbox -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+  
+  <!-- File con i luoghi -->
+  <script src="luoghi.js"></script>
 
-  <!-- Script per la mappa -->
   <script>
     mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw";
 
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha', // stile tuo
-      center: [12.4964, 41.9028], // Roma (long, lat)
+      style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha', 
+      center: [12.4964, 41.9028], // Roma
       zoom: 11
     });
 
-    // Aggiunge controlli zoom/rotazione
     map.addControl(new mapboxgl.NavigationControl());
 
-    // Esempio marker
-    new mapboxgl.Marker()
-      .setLngLat([12.4924, 41.8902]) // Colosseo
-      .setPopup(new mapboxgl.Popup().setHTML("<b>Colosseo</b><br>Icona di Roma"))
-      .addTo(map);
+    // Ciclo su tutti i luoghi da luoghi.js
+    window.PLACES.forEach(place => {
+      new mapboxgl.Marker()
+        .setLngLat(place.coords)
+        .setPopup(new mapboxgl.Popup().setHTML(`<b>${place.name}</b><br>${place.desc}`))
+        .addTo(map);
+    });
   </script>
 </body>
 </html>
