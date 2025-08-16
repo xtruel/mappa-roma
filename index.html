@@ -1,51 +1,71 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Mappa Roma</title>
 
-  <!-- Mapbox CSS -->
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
-  <!-- Stile custom -->
-  <link href="style.css" rel="stylesheet">
+  <!-- Il tuo CSS -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- CSS di Mapbox GL -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
 </head>
 <body>
-  <!-- Sidebar -->
-  <div id="sidebar">
+  <aside id="sidebar">
     <h2>Mappa Roma</h2>
     <p>Luoghi iconici e underground di Roma</p>
-  </div>
+  </aside>
 
-  <!-- Mappa -->
   <div id="map"></div>
 
-  <!-- Mapbox JS -->
+  <!-- JS di Mapbox GL -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
-  <!-- File con i luoghi -->
+
+  <!-- Il file con i luoghi: deve definire window.PLACES = [...] -->
   <script src="luoghi.js"></script>
+
+  <!-- Inizializzazione mappa -->
   <script>
-    // Token Mapbox (puoi cambiarlo con il tuo personale)
-    mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA';
-
-    // Inizializza la mappa
-    const map = new mapboxgl.Map({
-      container: 'map',
+    const APP = {
+      token: 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA',
       style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
-      center: [12.4964, 41.9028], // Roma
+      center: [12.4964, 41.9028],
       zoom: 12
-    });
+    };
 
-    // Aggiungi controlli di zoom
-    map.addControl(new mapboxgl.NavigationControl());
+    (function start() {
+      if (!window.mapboxgl) {
+        console.error('Mapbox GL non è stato caricato');
+        return;
+      }
 
-    // Aggiungi i luoghi dal file luoghi.js
-    luoghi.forEach(luogo => {
-      new mapboxgl.Marker()
-        .setLngLat(luogo.coords)
-        .setPopup(new mapboxgl.Popup().setHTML(`<h3>${luogo.nome}</h3><p>${luogo.descrizione}</p>`))
-        .addTo(map);
-    });
+      mapboxgl.accessToken = APP.token;
+
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: APP.style,
+        center: APP.center,
+        zoom: APP.zoom
+      });
+
+      map.addControl(new mapboxgl.NavigationControl(), 'top-right');
+      map.addControl(new mapboxgl.FullscreenControl(), 'top-right');
+
+      const places = (window.PLACES || []);
+      places.forEach(p => {
+        const el = document.createElement('div');
+        el.className = 'marker';
+        el.style.background = p.color || '#ffcc00';
+        el.style.borderColor = '#7b0000';
+
+        new mapboxgl.Marker(el)
+          .setLngLat(p.coords)         // [lng, lat]
+          .setPopup(new mapboxgl.Popup({ offset: 12 })
+            .setHTML(`<h3>${p.name}</h3><p><strong>${p.category||''}</strong></p>`))
+          .addTo(map);
+      });
+    })();
   </script>
 </body>
 </html>
