@@ -5,10 +5,10 @@
   <title>Mappa Roma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS -->
+  <!-- CSS tuo -->
   <link rel="stylesheet" href="style.css">
 
-  <!-- Mapbox CSS -->
+  <!-- CSS Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
 </head>
 <body>
@@ -18,28 +18,30 @@
   </div>
   <div id="map"></div>
 
-  <!-- Mapbox JS -->
+  <!-- JS Mapbox (prima del tuo codice!) -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
 
-  <!-- File con i luoghi (assicurati che il file si chiami esattamente luoghi.js e sia nello stesso repo) -->
+  <!-- File con i luoghi -->
   <script src="luoghi.js"></script>
 
-  <!-- Script principale -->
+  <!-- Il tuo script principale -->
   <script>
     window.onload = function() {
+      // Token Mapbox
       mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw";
 
+      // Creazione mappa
       const map = new mapboxgl.Map({
         container: "map",
-        style: "mapbox://styles/mapbox/streets-v11", 
+        style: "mapbox://styles/mapbox/streets-v11",
         center: [12.4964, 41.9028], // Roma centro
         zoom: 11
       });
 
-      // Controlli base (zoom, rotazione)
+      // Controlli mappa (zoom e rotazione)
       map.addControl(new mapboxgl.NavigationControl());
 
-      // Aggiunta marker dai dati in luoghi.js
+      // Aggiunta marker dai luoghi (se esiste il file luoghi.js)
       if (window.PLACES) {
         window.PLACES.forEach(place => {
           new mapboxgl.Marker()
