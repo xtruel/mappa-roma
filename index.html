@@ -1,6 +1,62 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+  <meta charset="UTF-8">
+  <title>Mappa Roma</title>
+
+  <!-- CSS Mapbox -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
+
+  <!-- CSS tuo -->
+  <link href="style.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Sidebar -->
+  <aside id="sidebar">
+    <h1>Mappa Roma</h1>
+    <p>Luoghi iconici e underground di Roma</p>
+  </aside>
+
+  <!-- Mappa -->
+  <div id="map"></div>
+
+  <!-- JS Mapbox: deve essere PRIMA del tuo codice -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+
+  <!-- File con i luoghi -->
+  <script src="luoghi.js"></script>
+
+  <!-- Codice mappa -->
+  <script>
+    // Token
+    mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZW5lMjZ4MGwzbDJtcGYxOWoyYTBrcyJ9.fyoE-HWdYaUWsdAhNNcmzw";
+
+    // Creazione mappa
+    const map = new mapboxgl.Map({
+      container: 'map',
+      style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
+      center: [12.4964, 41.9028], // coordinate Roma
+      zoom: 11
+    });
+
+    // Controlli zoom e rotazione
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // Aggiunta marker dai luoghi
+    if (window.PLACES) {
+      window.PLACES.forEach(place => {
+        new mapboxgl.Marker()
+          .setLngLat(place.coords)
+          .setPopup(new mapboxgl.Popup().setHTML(`<b>${place.name}</b><br>${place.desc}`))
+          .addTo(map);
+      });
+    }
+  </script>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="it">
+<head>
   <meta charset="utf-8">
   <title>Mappa Roma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
