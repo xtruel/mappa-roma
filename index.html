@@ -2,7 +2,7 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <title>Mappa Roma</title>
+  <title>Mappa Roma - 70 Best Places</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS tuo -->
@@ -14,43 +14,239 @@
 <body>
   <div id="sidebar">
     <h2>Mappa Roma</h2>
-    <p>Luoghi iconici e underground di Roma</p>
+    <p>70 Best Places in Rome</p>
+    
+    <!-- Map Provider Toggle -->
+    <div class="map-toggle">
+      <button id="mapbox-btn" class="toggle-btn active">Mapbox</button>
+      <button id="google-btn" class="toggle-btn">Google Maps</button>
+    </div>
+    
+    <!-- Category Filter -->
+    <div class="category-filter">
+      <h3>Categories</h3>
+      <select id="category-select">
+        <option value="all">All Places (70)</option>
+        <option value="Ancient Sites">Ancient Sites</option>
+        <option value="Religious Sites">Religious Sites</option>
+        <option value="Museums">Museums</option>
+        <option value="Fountains">Fountains</option>
+        <option value="Squares">Squares</option>
+        <option value="Parks">Parks</option>
+        <option value="Neighborhoods">Neighborhoods</option>
+        <option value="Hidden Gems">Hidden Gems</option>
+        <option value="Monuments">Monuments</option>
+        <option value="Bridges">Bridges</option>
+      </select>
+    </div>
+    
+    <!-- Places Counter -->
+    <div class="places-counter">
+      <span id="places-count">70 places shown</span>
+    </div>
   </div>
-  <div id="map"></div>
+  
+  <div id="mapbox-container" class="map-container active">
+    <div id="mapbox-map"></div>
+  </div>
+  
+  <div id="google-container" class="map-container">
+    <div id="google-map"></div>
+  </div>
 
-  <!-- JS Mapbox (prima del tuo codice!) -->
+  <!-- JS Mapbox -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.js"></script>
+  
+  <!-- Google Maps API -->
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=YOUR_GOOGLE_MAPS_API_KEY&callback=initGoogleMap"></script>
 
-  <!-- File con i luoghi -->
+  <!-- Rome Places Data -->
+  <script src="rome-places-data.js"></script>
+  
+  <!-- File con i luoghi (legacy) -->
   <script src="luoghi.js"></script>
 
-  <!-- Il tuo script principale -->
+  <!-- Main Application Script -->
   <script>
+    let mapboxMap, googleMap;
+    let currentMapProvider = 'mapbox';
+    let mapboxMarkers = [];
+    let googleMarkers = [];
+    let filteredPlaces = [];
+    
+    // Initialize application
     window.onload = function() {
-      // Token Mapbox
+      initMapbox();
+      initUI();
+      loadPlaces();
+    };
+    
+    // Initialize Mapbox
+    function initMapbox() {
       mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZXBpZ2N5MGY2dzJtczlicTdieDZraiJ9.JVaKNpAZCi32InzFXzOSdw";
-
-      // Creazione mappa
-      const map = new mapboxgl.Map({
-        container: "map",
+      
+      mapboxMap = new mapboxgl.Map({
+        container: "mapbox-map",
         style: "mapbox://styles/mapbox/streets-v11",
-        center: [12.4964, 41.9028], // Roma centro
+        center: [12.4964, 41.9028],
         zoom: 11
       });
-
-      // Controlli mappa (zoom e rotazione)
-      map.addControl(new mapboxgl.NavigationControl());
-
-      // Aggiunta marker dai luoghi (se esiste il file luoghi.js)
-      if (window.PLACES) {
-        window.PLACES.forEach(place => {
+      
+      mapboxMap.addControl(new mapboxgl.NavigationControl());
+    }
+    
+    // Initialize Google Maps (called by Google Maps API)
+    function initGoogleMap() {
+      googleMap = new google.maps.Map(document.getElementById('google-map'), {
+        center: { lat: 41.9028, lng: 12.4964 },
+        zoom: 11,
+        mapTypeId: 'roadmap'
+      });
+    }
+    
+    // Initialize UI controls
+    function initUI() {
+      // Map toggle buttons
+      document.getElementById('mapbox-btn').addEventListener('click', () => switchMap('mapbox'));
+      document.getElementById('google-btn').addEventListener('click', () => switchMap('google'));
+      
+      // Category filter
+      document.getElementById('category-select').addEventListener('change', filterPlaces);
+    }
+    
+    // Switch between map providers
+    function switchMap(provider) {
+      currentMapProvider = provider;
+      
+      // Update button states
+      document.querySelectorAll('.toggle-btn').forEach(btn => btn.classList.remove('active'));
+      document.getElementById(provider + '-btn').classList.add('active');
+      
+      // Update map container visibility
+      document.querySelectorAll('.map-container').forEach(container => container.classList.remove('active'));
+      document.getElementById(provider + '-container').classList.add('active');
+      
+      // Reload markers for current provider
+      loadPlaces();
+    }
+    
+    // Load and display places
+    function loadPlaces() {
+      if (!window.romePlaces) return;
+      
+      // Clear existing markers
+      clearMarkers();
+      
+      // Get filtered places
+      const selectedCategory = document.getElementById('category-select').value;
+      filteredPlaces = selectedCategory === 'all' 
+        ? window.romePlaces 
+        : window.romePlaces.filter(place => place.category === selectedCategory);
+      
+      // Update counter
+      document.getElementById('places-count').textContent = `${filteredPlaces.length} places shown`;
+      
+      // Add markers based on current provider
+      if (currentMapProvider === 'mapbox' && mapboxMap) {
+        addMapboxMarkers();
+      } else if (currentMapProvider === 'google' && googleMap) {
+        addGoogleMarkers();
+      }
+    }
+    
+    // Add Mapbox markers
+    function addMapboxMarkers() {
+      filteredPlaces.forEach(place => {
+        const marker = new mapboxgl.Marker({ color: getCategoryColor(place.category) })
+          .setLngLat([place.lng, place.lat])
+          .setPopup(new mapboxgl.Popup().setHTML(
+            `<div class="popup-content">
+              <h3>${place.name}</h3>
+              <p><strong>Category:</strong> ${place.category}</p>
+              <p>${place.description}</p>
+            </div>`
+          ))
+          .addTo(mapboxMap);
+        
+        mapboxMarkers.push(marker);
+      });
+    }
+    
+    // Add Google Maps markers
+    function addGoogleMarkers() {
+      filteredPlaces.forEach(place => {
+        const marker = new google.maps.Marker({
+          position: { lat: place.lat, lng: place.lng },
+          map: googleMap,
+          title: place.name,
+          icon: {
+            url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
+              `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="8" fill="${getCategoryColor(place.category)}" stroke="white" stroke-width="2"/>
+              </svg>`
+            )}`,
+            scaledSize: new google.maps.Size(20, 20)
+          }
+        });
+        
+        const infoWindow = new google.maps.InfoWindow({
+          content: `<div class="popup-content">
+            <h3>${place.name}</h3>
+            <p><strong>Category:</strong> ${place.category}</p>
+            <p>${place.description}</p>
+          </div>`
+        });
+        
+        marker.addListener('click', () => {
+          infoWindow.open(googleMap, marker);
+        });
+        
+        googleMarkers.push(marker);
+      });
+    }
+    
+    // Clear all markers
+    function clearMarkers() {
+      mapboxMarkers.forEach(marker => marker.remove());
+      mapboxMarkers = [];
+      
+      googleMarkers.forEach(marker => marker.setMap(null));
+      googleMarkers = [];
+    }
+    
+    // Filter places by category
+    function filterPlaces() {
+      loadPlaces();
+    }
+    
+    // Get color for category
+    function getCategoryColor(category) {
+      const colors = {
+        'Ancient Sites': '#8B4513',
+        'Religious Sites': '#4169E1',
+        'Museums': '#9932CC',
+        'Fountains': '#00CED1',
+        'Squares': '#FF6347',
+        'Parks': '#32CD32',
+        'Neighborhoods': '#FF8C00',
+        'Hidden Gems': '#DC143C',
+        'Monuments': '#2F4F4F',
+        'Bridges': '#708090'
+      };
+      return colors[category] || '#666666';
+    }
+    
+    // Legacy support for old luoghi.js
+    if (window.PLACES) {
+      window.PLACES.forEach(place => {
+        if (mapboxMap) {
           new mapboxgl.Marker()
             .setLngLat(place.coords)
             .setPopup(new mapboxgl.Popup().setHTML(`<b>${place.name}</b><br>${place.desc}`))
-            .addTo(map);
-        });
-      }
-    };
+            .addTo(mapboxMap);
+        }
+      });
+    }
   </script>
 </body>
 </html>

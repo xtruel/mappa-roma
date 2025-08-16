@@ -14,13 +14,14 @@ body {
 
 /* Sidebar */
 #sidebar {
-  width: 300px;
+  width: 320px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   padding: 20px;
   box-shadow: 2px 0 10px rgba(0,0,0,0.1);
   z-index: 1000;
   position: relative;
+  overflow-y: auto;
 }
 
 #sidebar h2 {
@@ -33,9 +34,94 @@ body {
   font-size: 14px;
   opacity: 0.9;
   line-height: 1.4;
+  margin-bottom: 20px;
 }
 
-/* Mappa */
+/* Map Provider Toggle */
+.map-toggle {
+  margin-bottom: 20px;
+}
+
+.toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 10px 15px;
+  margin-right: 5px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+.toggle-btn.active {
+  background: white;
+  color: #667eea;
+  border-color: white;
+  font-weight: bold;
+}
+
+/* Category Filter */
+.category-filter {
+  margin-bottom: 20px;
+}
+
+.category-filter h3 {
+  font-size: 16px;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+#category-select {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 8px;
+  background: white;
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#category-select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Places Counter */
+.places-counter {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 10px;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+/* Map Containers */
+.map-container {
+  flex: 1;
+  height: 100vh;
+  display: none;
+}
+
+.map-container.active {
+  display: block;
+}
+
+#mapbox-map, #google-map {
+  width: 100%;
+  height: 100%;
+}
+
+/* Legacy map support */
 #map {
   flex: 1;
   height: 100vh;
@@ -43,8 +129,10 @@ body {
 
 /* Popup personalizzazione */
 .mapboxgl-popup-content {
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+  border: none;
+  max-width: 300px;
 }
 
 .mapboxgl-popup-content b {
@@ -52,9 +140,73 @@ body {
   font-size: 16px;
 }
 
+.popup-content {
+  padding: 5px;
+}
+
+.popup-content h3 {
+  color: #333;
+  font-size: 18px;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.popup-content p {
+  color: #666;
+  font-size: 14px;
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.popup-content p strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* Google Maps Info Window Styling */
+.gm-style .gm-style-iw-c {
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.gm-style .gm-style-iw-d {
+  overflow: hidden !important;
+}
+
 /* Marker personalizzazione */
 .mapboxgl-marker {
   cursor: pointer;
+}
+
+/* Category Color Legend */
+.category-legend {
+  margin-top: 15px;
+  font-size: 12px;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+/* Loading States */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background: #f5f5f5;
+  color: #666;
+  font-size: 16px;
 }
 
 /* Responsive */
@@ -67,6 +219,7 @@ body {
     width: 100%;
     height: auto;
     padding: 15px;
+    max-height: 40vh;
   }
   
   #sidebar h2 {
@@ -77,17 +230,67 @@ body {
     font-size: 12px;
   }
   
+  .map-container {
+    height: 60vh;
+  }
+  
   #map {
-    height: calc(100vh - 80px);
+    height: calc(100vh - 40vh);
+  }
+  
+  .toggle-btn {
+    padding: 8px 12px;
+    font-size: 12px;
+    margin-right: 3px;
+  }
+  
+  .category-filter h3 {
+    font-size: 14px;
+  }
+  
+  #category-select {
+    padding: 8px;
+    font-size: 12px;
   }
 }
 
 /* Controlli mappa */
 .mapboxgl-ctrl-group {
-  border-radius: 6px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  border: none;
 }
 
 .mapboxgl-ctrl-group button {
-  border-radius: 6px;
+  border-radius: 8px;
+  border: none;
+}
+
+/* Enhanced marker styling */
+.mapboxgl-marker {
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.mapboxgl-marker:hover {
+  transform: scale(1.1);
+}
+
+/* Custom scrollbar for sidebar */
+#sidebar::-webkit-scrollbar {
+  width: 6px;
+}
+
+#sidebar::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+#sidebar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: 3px;
+}
+
+#sidebar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.5);
 }
