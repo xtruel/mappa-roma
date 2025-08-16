@@ -4,7 +4,11 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mappa Roma</title>
+
+  <!-- Mapbox CSS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
+
+  <!-- Stile base -->
   <style>
     body, html {
       margin: 0;
@@ -13,80 +17,56 @@
       font-family: Arial, sans-serif;
       display: flex;
     }
+
+    /* Sidebar */
     #sidebar {
-      width: 280px;
-      background: linear-gradient(to bottom, #7b0000, #ffcc00);
-      color: #fff;
+      width: 300px;
+      background: linear-gradient(to bottom, #8B0000, #FFD700);
+      color: white;
       padding: 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      box-sizing: border-box;
     }
-    #sidebar h2 {
-      color: #ffcc00;
-      margin-bottom: 10px;
+
+    #sidebar h1 {
+      margin: 0;
+      font-size: 24px;
     }
+
+    /* Contenitore mappa */
     #map {
-      flex: 1;
+      flex-grow: 1;
       height: 100%;
-      width: 100%;
-    }
-    .marker {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      background-color: #ffcc00;
-      border: 2px solid #7b0000;
-      cursor: pointer;
-    }
-    .mapboxgl-popup-content {
-      background: #fffbea;
-      border: 2px solid #7b0000;
-      border-radius: 8px;
-      font-size: 14px;
-      padding: 8px;
     }
   </style>
 </head>
 <body>
+  <!-- Sidebar -->
   <div id="sidebar">
-    <h2>Mappa Roma</h2>
+    <h1>Mappa Roma</h1>
     <p>Luoghi iconici e underground di Roma</p>
   </div>
+
+  <!-- Mappa -->
   <div id="map"></div>
 
+  <!-- Mapbox JS -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+
+  <!-- Luoghi -->
+  <script src="luoghi.js"></script>
+
+  <!-- Script principale -->
   <script>
-    // Access Token
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA';
 
-    // Mappa con stile personalizzato del cliente
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
       center: [12.4964, 41.9028], // Roma centro
-      zoom: 11
+      zoom: 12
     });
 
-    map.addControl(new mapboxgl.NavigationControl());
-
-    // 5 esempi di luoghi (puoi aggiungerne 100+ in seguito)
-    const luoghi = [
-      { name: "Colosseo", coords: [12.4922, 41.8902] },
-      { name: "Piazza Navona", coords: [12.4731, 41.8992] },
-      { name: "Testaccio Club", coords: [12.4768, 41.8755] },
-      { name: "Teatro dell'Opera", coords: [12.4942, 41.9010] },
-      { name: "Basilica di San Pietro", coords: [12.4534, 41.9022] }
-    ];
-
-    luoghi.forEach(l => {
-      const el = document.createElement('div');
-      el.className = 'marker';
-      new mapboxgl.Marker(el)
-        .setLngLat(l.coords)
-        .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(l.name))
-        .addTo(map);
-    });
-  </script>
-</body>
-</html>
+    // Aggiunge i luoghi dal file luoghi.js
+    PLACES.forEach(place => {
+      new mapboxgl.Marker()
+        .setLngLat(place.
