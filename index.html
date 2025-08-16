@@ -2,45 +2,60 @@
 <html lang="it">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mappa Roma</title>
-  
-  <!-- CSS -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet" />
   <style>
-    body { margin: 0; font-family: Arial, sans-serif; }
-    header {
-      background: #800000; color: white;
-      padding: 10px; display: flex;
-      align-items: center; gap: 10px;
-      font-size: 18px; font-weight: bold;
+    body { margin: 0; font-family: Arial, sans-serif; display:flex; }
+    #sidebar {
+      width: 300px; background:#800000; color:white; padding:10px; overflow-y:auto; height:100vh;
     }
-    .logo { height: 40px; }
-    #map { position: absolute; top: 60px; bottom: 0; width: 100%; }
+    #map { flex:1; height:100vh; }
+    .place { padding:5px; cursor:pointer; border-bottom:1px solid #555; }
+    .place:hover { background:#a00000; }
+    #logo { max-width: 100%; margin-bottom:10px; }
   </style>
-
-  <!-- Mapbox CSS -->
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.css" rel="stylesheet">
 </head>
 <body>
-  <header>
-    <img src="logo.svg" alt="Logo Roma" class="logo">
-    Mappa Roma
-  </header>
-
+  <div id="sidebar">
+    <img id="logo" src="logo.png" alt="Logo Roma" />
+    <h2>Mappa Roma</h2>
+    <div id="places"></div>
+  </div>
   <div id="map"></div>
 
-  <!-- Mapbox JS -->
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.15.0/mapbox-gl.js"></script>
-
-  <!-- Config & Init -->
+  <script src="luoghi-mappa-roma"></script>
   <script>
-    mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lYnowZ3ZuMGN2YjJrcGxpZzlld3RnZSJ9.PdSpj6URxZSU3GWvgvFwRA";
-
+    mapboxgl.accessToken = 'INSERISCI_IL_TUO_TOKEN_MAPBOX';
     const map = new mapboxgl.Map({
       container: 'map',
-      style: "mapbox://styles/mapbox/streets-v12",
-      center: [12.4964, 41.9028], // Roma
+      style: 'mapbox://styles/mapbox/streets-v12',
+      center: [12.4964, 41.9028],
       zoom: 12
+    });
+
+    const placesDiv = document.getElementById('places');
+
+    PLACES.forEach(place => {
+      // Marker
+      const el = document.createElement('div');
+      el.style.width = '20px';
+      el.style.height = '20px';
+      el.style.backgroundColor = place.color;
+      el.style.borderRadius = '50%';
+
+      new mapboxgl.Marker(el)
+        .setLngLat(place.coords)
+        .setPopup(new mapboxgl.Popup().setText(place.name))
+        .addTo(map);
+
+      // Sidebar item
+      const div = document.createElement('div');
+      div.className = 'place';
+      div.textContent = place.name;
+      div.onclick = () => map.flyTo({ center: place.coords, zoom: 15 });
+      placesDiv.appendChild(div);
     });
   </script>
 </body>
