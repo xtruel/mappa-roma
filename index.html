@@ -13,8 +13,14 @@
 </head>
 <body>
   <div id="sidebar">
-    <h2>Mappa Roma</h2>
-    <p>70 Best Places in Rome</p>
+    <div class="sidebar-header">
+      <h1 id="site-title">Mappa Roma</h1>
+      <p id="subtitle">Discover the Eternal City</p>
+      <div class="language-switcher">
+        <button id="lang-en" class="lang-btn active" data-lang="en">EN</button>
+        <button id="lang-it" class="lang-btn" data-lang="it">IT</button>
+      </div>
+    </div>
     
     <!-- Map Provider Toggle -->
     <div class="map-toggle">
@@ -62,23 +68,77 @@
 
   <!-- Rome Places Data -->
   <script src="rome-places-data.js"></script>
+  <script src="language-data.js"></script>
   
   <!-- File con i luoghi (legacy) -->
   <script src="luoghi.js"></script>
 
   <!-- Main Application Script -->
   <script>
+    let currentLanguage = 'en';
     let mapboxMap, googleMap;
     let currentMapProvider = 'mapbox';
     let mapboxMarkers = [];
     let googleMarkers = [];
     let filteredPlaces = [];
     
+    // Language switching functionality
+    function switchLanguage(lang) {
+      currentLanguage = lang;
+      updateUILanguage();
+      loadPlaces();
+      
+      // Update active language button
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.classList.remove('active');
+      });
+      document.getElementById(`lang-${lang}`).classList.add('active');
+    }
+    
+    function updateUILanguage() {
+      const texts = languageData[currentLanguage];
+      
+      // Update page title
+      document.title = texts.pageTitle;
+      
+      // Update site title and subtitle
+      document.getElementById('site-title').textContent = texts.siteTitle;
+      document.getElementById('subtitle').textContent = texts.subtitle;
+      
+      // Update category filter
+       const categorySelect = document.getElementById('category-select');
+       categorySelect.innerHTML = `
+         <option value="all">${texts.categories.all}</option>
+         <option value="Ancient Sites">${texts.categories.ancientSites}</option>
+         <option value="Vatican & Religious">${texts.categories.vaticanReligious}</option>
+         <option value="Fountains & Squares">${texts.categories.fountainsSquares}</option>
+         <option value="Museums & Galleries">${texts.categories.museumsGalleries}</option>
+         <option value="Parks & Gardens">${texts.categories.parksGardens}</option>
+         <option value="Neighborhoods">${texts.categories.neighborhoods}</option>
+         <option value="Hidden Gems">${texts.categories.hiddenGems}</option>
+       `;
+      
+      // Update places counter
+      updatePlacesCounter();
+    }
+    
+    function updatePlacesCounter() {
+      const count = filteredPlaces.length;
+      const texts = languageData[currentLanguage];
+      document.getElementById('places-count').textContent = 
+        `${count} ${count === 1 ? texts.placesCounter.singular : texts.placesCounter.plural}`;
+    }
+    
+    function getLocalizedText(textObj) {
+      return typeof textObj === 'object' ? textObj[currentLanguage] : textObj;
+    }
+    
     // Initialize application
     window.onload = function() {
       initMapbox();
       initUI();
       loadPlaces();
+      updateUILanguage(); // Initialize UI with default language
     };
     
     // Initialize Mapbox
@@ -112,6 +172,14 @@
       
       // Category filter
       document.getElementById('category-select').addEventListener('change', filterPlaces);
+      
+      // Language switcher event listeners
+      document.querySelectorAll('.lang-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+          const lang = this.getAttribute('data-lang');
+          switchLanguage(lang);
+        });
+      });
     }
     
     // Switch between map providers
@@ -144,7 +212,7 @@
         : window.romePlaces.filter(place => place.category === selectedCategory);
       
       // Update counter
-      document.getElementById('places-count').textContent = `${filteredPlaces.length} places shown`;
+      updatePlacesCounter();
       
       // Add markers based on current provider
       if (currentMapProvider === 'mapbox' && mapboxMap) {
@@ -157,13 +225,16 @@
     // Add Mapbox markers
     function addMapboxMarkers() {
       filteredPlaces.forEach(place => {
+        const name = getLocalizedText(place.name);
+        const description = getLocalizedText(place.description);
+        
         const marker = new mapboxgl.Marker({ color: getCategoryColor(place.category) })
           .setLngLat([place.lng, place.lat])
           .setPopup(new mapboxgl.Popup().setHTML(
             `<div class="popup-content">
-              <h3>${place.name}</h3>
+              <h3>${name}</h3>
               <p><strong>Category:</strong> ${place.category}</p>
-              <p>${place.description}</p>
+              <p>${description}</p>
             </div>`
           ))
           .addTo(mapboxMap);
@@ -175,10 +246,13 @@
     // Add Google Maps markers
     function addGoogleMarkers() {
       filteredPlaces.forEach(place => {
+        const name = getLocalizedText(place.name);
+        const description = getLocalizedText(place.description);
+        
         const marker = new google.maps.Marker({
           position: { lat: place.lat, lng: place.lng },
           map: googleMap,
-          title: place.name,
+          title: name,
           icon: {
             url: `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(
               `<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -191,9 +265,9 @@
         
         const infoWindow = new google.maps.InfoWindow({
           content: `<div class="popup-content">
-            <h3>${place.name}</h3>
+            <h3>${name}</h3>
             <p><strong>Category:</strong> ${place.category}</p>
-            <p>${place.description}</p>
+            <p>${description}</p>
           </div>`
         });
         
