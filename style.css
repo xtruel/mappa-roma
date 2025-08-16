@@ -1,52 +1,63 @@
-body {
+/* Reset base */
+* {
   margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  display: flex;
+}
+
+/* Sidebar */
+#sidebar {
+  width: 220px;
+  background: linear-gradient(to bottom, #8B0000, #FF8C00, #FFD700);
+  color: #fff;
+  padding: 20px;
+  flex-shrink: 0;
+}
+
+#sidebar h2 {
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+#sidebar p {
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+/* Mappa */
+#map {
+  flex: 1;
+  height: 100%;
+  width: 100%;
+}
+
+/* Popup Mapbox */
+.mapboxgl-popup {
+  max-width: 250px;
   font-family: Arial, sans-serif;
 }
-#map {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 250px;
-}
-#sidebar {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 250px;
-  height: 100%;
-  background: linear-gradient(#8b0000, #ffcc00);
-  color: white;
-  overflow-y: auto;
+
+.mapboxgl-popup-content {
   padding: 10px;
-}
-#logo {
-  width: 100%;
-  max-height: 120px;
-  margin-bottom: 10px;
-}
-#categories button {
-  display: block;
-  width: 100%;
-  margin: 5px 0;
-  padding: 8px;
-  background: rgba(255,255,255,0.2);
-  border: none;
-  color: white;
-  font-weight: bold;
-  cursor: pointer;
-}
-#categories button:hover {
-  background: rgba(255,255,255,0.4);
-}
-#places-list {
-  list-style: none;
-  padding: 0;
-}
-#places-list li {
-  margin: 4px 0;
-  cursor: pointer;
-}
-.marker {
   font-size: 14px;
+}
+
+.mapboxgl-popup-content h3 {
+  margin: 0 0 5px;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.mapboxgl-popup-content p {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.3;
 }
