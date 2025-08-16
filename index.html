@@ -1,32 +1,110 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mappa Roma</title>
+  <!-- Mapbox CSS -->
+  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
+  <style>
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
+    html, body {
+      height: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-  <!-- Libreria Mapbox -->
-  <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
-  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
+    /* Layout principale */
+    body {
+      display: flex;
+      flex-direction: row;
+      height: 100vh;
+    }
+
+    /* Sidebar */
+    #sidebar {
+      width: 280px;
+      background: linear-gradient(to bottom, #7b0000, #ffcc00);
+      color: #fff;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    #sidebar .logo {
+      width: 120px;
+      margin-bottom: 15px;
+    }
+
+    #sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 10px;
+      color: #ffcc00; /* Giallo Roma */
+    }
+
+    #sidebar p {
+      font-size: 14px;
+      text-align: center;
+      line-height: 1.4;
+      color: #f0f0f0;
+    }
+
+    /* Mappa */
+    #map {
+      flex: 1;
+      height: 100%;
+      width: 100%;
+    }
+
+    /* Marker personalizzato */
+    .marker {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background-color: #ffcc00;
+      border: 2px solid #7b0000;
+      cursor: pointer;
+    }
+
+    /* Popup */
+    .mapboxgl-popup {
+      max-width: 250px;
+      font-size: 14px;
+    }
+
+    .mapboxgl-popup-content {
+      background: #fffbea;
+      color: #333;
+      border: 2px solid #7b0000;
+      border-radius: 8px;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
   <!-- Sidebar -->
   <div id="sidebar">
-    <img src="logo.png" alt="Logo Roma" class="logo" />
+    <img src="logo.png" alt="Logo Roma" class="logo">
     <h2>Mappa Roma</h2>
-    <p>Scopri più di 100 luoghi iconici, nascosti e underground della Capitale!</p>
+    <p>Scopri più di 100 luoghi iconici,<br> nascosti e underground della Capitale!</p>
   </div>
 
-  <!-- Mappa -->
+  <!-- Contenitore mappa -->
   <div id="map"></div>
 
-  <!-- Script inizializzazione mappa -->
+  <!-- Mapbox JS -->
+  <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
   <script>
+    // Token Mapbox
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lYnowZ3ZuMGN2YjJrcGxpZzlld3RnZSJ9.PdSpj6URxZSU3GWvgvFwRA';
 
+    // Inizializzazione mappa
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/mapbox/streets-v12',
@@ -34,18 +112,8 @@
       zoom: 11
     });
 
-    // Controlli mappa
+    // Controllo di navigazione
     map.addControl(new mapboxgl.NavigationControl());
-
-    // Marker di test al centro di Roma
-    new mapboxgl.Marker({ color: "#ffcc00" })
-      .setLngLat([12.4964, 41.9028])
-      .setPopup(new mapboxgl.Popup().setText("Roma Centro"))
-      .addTo(map);
   </script>
-
-  <!-- Script con i luoghi -->
-  <script src="places.js"></script>
-  <script src="luoghi-mappa-roma.js"></script>
 </body>
 </html>
