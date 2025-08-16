@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
   <title>Mappa Roma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS Mapbox -->
+  <!-- Mapbox CSS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
 
+  <!-- Stile custom -->
   <style>
     body, html {
       margin: 0;
-      padding: 0;
       height: 100%;
       font-family: Arial, sans-serif;
       display: flex;
     }
-
     #sidebar {
       width: 250px;
+      padding: 10px;
       background: linear-gradient(to bottom, #8B0000, #FFD700);
       color: white;
-      padding: 20px;
     }
-
     #map {
-      flex: 1;
-      height: 100%;
+      flex-grow: 1;
     }
   </style>
 </head>
@@ -35,19 +32,17 @@
     <h2>Mappa Roma</h2>
     <p>Luoghi iconici e underground di Roma</p>
   </div>
-
   <div id="map"></div>
 
-  <!-- JS Mapbox -->
+  <!-- Mapbox JS -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
   <script>
-    mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA";
-
+    mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA';
     const map = new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha",
+      container: 'map',
+      style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
       center: [12.4964, 41.9028], // Roma
-      zoom: 12
+      zoom: 11
     });
   </script>
 </body>
