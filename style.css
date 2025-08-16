@@ -1,31 +1,93 @@
-// luoghi.js
-// Qui definiamo SOLO l’array dei luoghi
-// Accessibile da index.html come window.PLACES
+/* Reset e base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-window.PLACES = [
-  {
-    name: "Colosseo",
-    desc: "Icona di Roma, simbolo dell’Impero",
-    coords: [12.4924, 41.8902]
-  },
-  {
-    name: "Foro Romano",
-    desc: "Centro politico e culturale dell’antica Roma",
-    coords: [12.4853, 41.8925]
-  },
-  {
-    name: "Pantheon",
-    desc: "Tempio di tutti gli dei, con la cupola spettacolare",
-    coords: [12.4768, 41.8986]
-  },
-  {
-    name: "Trastevere",
-    desc: "Quartiere storico e pittoresco di Roma",
-    coords: [12.4663, 41.8896]
-  },
-  {
-    name: "San Pietro",
-    desc: "La basilica più famosa del mondo",
-    coords: [12.4534, 41.9022]
+body {
+  font-family: 'Arial', sans-serif;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+}
+
+/* Sidebar */
+#sidebar {
+  width: 300px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 20px;
+  box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+  z-index: 1000;
+  position: relative;
+}
+
+#sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#sidebar p {
+  font-size: 14px;
+  opacity: 0.9;
+  line-height: 1.4;
+}
+
+/* Mappa */
+#map {
+  flex: 1;
+  height: 100vh;
+}
+
+/* Popup personalizzazione */
+.mapboxgl-popup-content {
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.mapboxgl-popup-content b {
+  color: #333;
+  font-size: 16px;
+}
+
+/* Marker personalizzazione */
+.mapboxgl-marker {
+  cursor: pointer;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    flex-direction: column;
   }
-];
+  
+  #sidebar {
+    width: 100%;
+    height: auto;
+    padding: 15px;
+  }
+  
+  #sidebar h2 {
+    font-size: 20px;
+  }
+  
+  #sidebar p {
+    font-size: 12px;
+  }
+  
+  #map {
+    height: calc(100vh - 80px);
+  }
+}
+
+/* Controlli mappa */
+.mapboxgl-ctrl-group {
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.mapboxgl-ctrl-group button {
+  border-radius: 6px;
+}

@@ -1,0 +1,9 @@
+name = "mappa-roma"
+compatibility_date = "2023-12-01"
+pages_build_output_dir = "./"
+
+[env.production]
+name = "mappa-roma"
+
+[env.preview]
+name = "mappa-roma-preview"
