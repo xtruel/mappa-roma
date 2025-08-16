@@ -4,18 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mappa Roma</title>
-  <!-- Mapbox CSS -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
   <style>
-    /* Reset */
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html, body { height: 100%; font-family: Arial, Helvetica, sans-serif; }
-
-    /* Layout principale */
-    body { display: flex; flex-direction: row; height: 100vh; }
-
-    /* Sidebar */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: Arial, sans-serif;
+      display: flex;
+    }
     #sidebar {
       width: 280px;
       background: linear-gradient(to bottom, #7b0000, #ffcc00);
@@ -25,15 +22,15 @@
       flex-direction: column;
       align-items: center;
     }
-
-    #sidebar .logo { width: 120px; margin-bottom: 15px; }
-    #sidebar h2 { font-size: 22px; margin-bottom: 10px; color: #ffcc00; }
-    #sidebar p { font-size: 14px; text-align: center; line-height: 1.4; color: #f0f0f0; }
-
-    /* Mappa */
-    #map { flex: 1; height: 100%; width: 100%; }
-
-    /* Marker personalizzato */
+    #sidebar h2 {
+      color: #ffcc00;
+      margin-bottom: 10px;
+    }
+    #map {
+      flex: 1;
+      height: 100%;
+      width: 100%;
+    }
     .marker {
       width: 18px;
       height: 18px;
@@ -42,110 +39,52 @@
       border: 2px solid #7b0000;
       cursor: pointer;
     }
-
-    /* Popup */
-    .mapboxgl-popup {
-      max-width: 250px;
-      font-size: 14px;
-    }
     .mapboxgl-popup-content {
       background: #fffbea;
-      color: #333;
       border: 2px solid #7b0000;
       border-radius: 8px;
-      padding: 10px;
+      font-size: 14px;
+      padding: 8px;
     }
   </style>
 </head>
 <body>
-  <!-- Sidebar -->
   <div id="sidebar">
-    <img src="logo.png" alt="Logo Roma" class="logo">
     <h2>Mappa Roma</h2>
-    <p>Scopri più di 100 luoghi iconici,<br> nascosti e underground della Capitale!</p>
+    <p>Luoghi iconici e underground di Roma</p>
   </div>
-
-  <!-- Contenitore mappa -->
   <div id="map"></div>
 
-  <!-- Mapbox JS -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
   <script>
-    // Token Mapbox aggiornato
+    // Access Token
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA';
 
-    // Inizializza mappa
+    // Mappa con stile personalizzato del cliente
     const map = new mapboxgl.Map({
       container: 'map',
-      style: 'mapbox://styles/mapbox/streets-v12',
-      center: [12.4964, 41.9028], // Roma
+      style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
+      center: [12.4964, 41.9028], // Roma centro
       zoom: 11
     });
 
     map.addControl(new mapboxgl.NavigationControl());
 
-    // Lista dei luoghi
+    // 5 esempi di luoghi (puoi aggiungerne 100+ in seguito)
     const luoghi = [
       { name: "Colosseo", coords: [12.4922, 41.8902] },
-      { name: "Foro Romano", coords: [12.4853, 41.8925] },
-      { name: "Pantheon", coords: [12.4769, 41.8986] },
-      { name: "Fontana di Trevi", coords: [12.4833, 41.9009] },
-      { name: "Piazza di Spagna", coords: [12.4829, 41.9057] },
-      { name: "Trastevere", coords: [12.4663, 41.8896] },
-      { name: "Campo de' Fiori", coords: [12.4722, 41.8956] },
-      { name: "Castel Sant'Angelo", coords: [12.4663, 41.9031] },
-      { name: "San Pietro", coords: [12.4534, 41.9029] },
-      { name: "Circo Massimo", coords: [12.4880, 41.8852] },
-      { name: "Piazza Venezia", coords: [12.4828, 41.8947] },
-      { name: "Altare della Patria", coords: [12.4823, 41.8945] },
-      { name: "Villa Borghese", coords: [12.4923, 41.9142] },
-      { name: "Galleria Borghese", coords: [12.4924, 41.9146] },
-      { name: "MAXXI", coords: [12.4667, 41.9291] },
-      { name: "EUR Obelisco", coords: [12.4716, 41.8336] },
-      { name: "Ostiense - Street Art", coords: [12.4823, 41.8619] },
-      { name: "Cimitero Acattolico", coords: [12.4761, 41.8762] },
-      { name: "Catacombe di San Sebastiano", coords: [12.5166, 41.8558] },
-      { name: "Appia Antica", coords: [12.5200, 41.8525] },
-      { name: "Acquedotti Romani", coords: [12.5646, 41.8536] },
-      { name: "Quartiere Coppedè", coords: [12.5113, 41.9199] },
-      { name: "Pigneto", coords: [12.5297, 41.8890] },
-      { name: "Testaccio", coords: [12.4757, 41.8756] },
       { name: "Piazza Navona", coords: [12.4731, 41.8992] },
-      { name: "Piazza del Popolo", coords: [12.4768, 41.9109] },
-      { name: "Giardino degli Aranci", coords: [12.4778, 41.8858] },
-      { name: "Aventino - Buco della Serratura", coords: [12.4824, 41.8881] },
-      { name: "Palatino", coords: [12.4852, 41.8896] },
-      { name: "Domus Aurea", coords: [12.4980, 41.8905] },
-      { name: "Stadio Olimpico", coords: [12.4547, 41.9341] },
-      { name: "Foro Italico", coords: [12.4540, 41.9331] },
-      { name: "Ponte Milvio", coords: [12.4672, 41.9297] },
-      { name: "Quartiere Garbatella", coords: [12.4884, 41.8622] },
-      { name: "Ex Mattatoio Testaccio", coords: [12.4739, 41.8745] },
-      { name: "Basilica di San Giovanni", coords: [12.5058, 41.8856] },
-      { name: "Porta Portese", coords: [12.4676, 41.8778] },
-      { name: "Mercato di Campo de' Fiori", coords: [12.4722, 41.8953] },
-      { name: "Isola Tiberina", coords: [12.4780, 41.8903] },
-      { name: "Sinagoga di Roma", coords: [12.4772, 41.8921] },
-      { name: "Centrale Montemartini", coords: [12.4828, 41.8641] },
-      { name: "Acquario Romano", coords: [12.5033, 41.8977] },
-      { name: "Piazza Barberini", coords: [12.4883, 41.9033] },
-      { name: "Musei Capitolini", coords: [12.4828, 41.8931] },
-      { name: "Caracalla - Terme", coords: [12.4924, 41.8840] },
-      { name: "Via Veneto - Dolce Vita", coords: [12.4882, 41.9050] },
-      { name: "Quartiere San Lorenzo", coords: [12.5175, 41.8989] },
-      { name: "Santa Maria Maggiore", coords: [12.4989, 41.8976] }
-      // 👉 puoi aggiungerne altri fino a 100+
+      { name: "Testaccio Club", coords: [12.4768, 41.8755] },
+      { name: "Teatro dell'Opera", coords: [12.4942, 41.9010] },
+      { name: "Basilica di San Pietro", coords: [12.4534, 41.9022] }
     ];
 
-    // Aggiungi marker per ogni luogo
-    luoghi.forEach(luogo => {
+    luoghi.forEach(l => {
       const el = document.createElement('div');
       el.className = 'marker';
-
       new mapboxgl.Marker(el)
-        .setLngLat(luogo.coords)
-        .setPopup(new mapboxgl.Popup({ offset: 25 })
-        .setHTML(`<h3>${luogo.name}</h3>`))
+        .setLngLat(l.coords)
+        .setPopup(new mapboxgl.Popup({ offset: 25 }).setText(l.name))
         .addTo(map);
     });
   </script>
