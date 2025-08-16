@@ -5,25 +5,28 @@
   <title>Mappa Roma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- Mapbox CSS -->
+  <!-- Mapbox CSS corretto -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
 
-  <!-- Stile custom -->
+  <!-- Styling della pagina -->
   <style>
     body, html {
       margin: 0;
+      padding: 0;
       height: 100%;
       font-family: Arial, sans-serif;
       display: flex;
     }
     #sidebar {
-      width: 250px;
-      padding: 10px;
+      width: 260px;
       background: linear-gradient(to bottom, #8B0000, #FFD700);
       color: white;
+      padding: 20px;
+      box-sizing: border-box;
     }
     #map {
-      flex-grow: 1;
+      flex: 1;
+      height: 100%;
     }
   </style>
 </head>
@@ -34,16 +37,30 @@
   </div>
   <div id="map"></div>
 
-  <!-- Mapbox JS -->
+  <!-- Mapbox JS corretto -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
   <script>
     mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lZWw5N3oyMGJoejJuczlybXhidTNwdCJ9.0uVwlSwtoN-tmTMMDnV3eA';
     const map = new mapboxgl.Map({
       container: 'map',
       style: 'mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha',
-      center: [12.4964, 41.9028], // Roma
+      center: [12.4964, 41.9028],
       zoom: 11
     });
+    map.addControl(new mapboxgl.NavigationControl());
+
+    // Se hai luoghi in luoghi.js
+    if (typeof PLACES !== 'undefined') {
+      PLACES.forEach(p => {
+        new mapboxgl.Marker()
+          .setLngLat(p.coords)
+          .setPopup(new mapboxgl.Popup().setHTML(`<h3>${p.name}</h3>`))
+          .addTo(map);
+      });
+    }
   </script>
+
+  <!-- Luoghi -->
+  <script src="luoghi.js"></script>
 </body>
 </html>
