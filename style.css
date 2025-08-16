@@ -1,4 +1,3 @@
-/* Reset di base */
 html, body {
   margin: 0;
   padding: 0;
@@ -8,7 +7,6 @@ html, body {
   display: flex;
 }
 
-/* Sidebar */
 #sidebar {
   width: 200px;
   background: linear-gradient(to bottom, #8B0000, #FF8C00, #FFD700);
@@ -17,17 +15,6 @@ html, body {
   box-sizing: border-box;
 }
 
-#sidebar h1 {
-  margin: 0 0 10px 0;
-  font-size: 20px;
-}
-
-#sidebar p {
-  font-size: 14px;
-  line-height: 1.4;
-}
-
-/* Mappa */
 #map {
   flex: 1;
   height: 100%;
