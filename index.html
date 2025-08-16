@@ -5,7 +5,7 @@
   <title>Mappa Roma</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSS Mapbox dal CDN -->
+  <!-- CSS di Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet">
 
   <!-- Il tuo CSS -->
@@ -21,9 +21,9 @@
   <!-- Div della mappa -->
   <div id="map"></div>
 
-  <!-- Script Mapbox -->
+  <!-- Script Mapbox deve venire PRIMA del tuo script -->
   <script src="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.js"></script>
-  
+
   <!-- File con i luoghi -->
   <script src="luoghi.js"></script>
 
@@ -39,7 +39,7 @@
 
     map.addControl(new mapboxgl.NavigationControl());
 
-    // Ciclo su tutti i luoghi da luoghi.js
+    // Aggiungo i marker dai luoghi
     window.PLACES.forEach(place => {
       new mapboxgl.Marker()
         .setLngLat(place.coords)
