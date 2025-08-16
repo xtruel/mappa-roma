@@ -6,7 +6,7 @@
   <title>Mappa Roma</title>
 
   <!-- CSS personalizzato -->
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 
   <!-- Libreria Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v2.16.1/mapbox-gl.css" rel="stylesheet" />
@@ -15,13 +15,30 @@
 <body>
   <!-- Sidebar -->
   <div id="sidebar">
-    <img src="logo.png" alt="Logo Roma" class="logo" />
+    <img src="assets/logo-roma.png" alt="Logo Roma" class="logo" />
     <h2>Mappa Roma</h2>
     <p>Scopri più di 100 luoghi iconici, nascosti e underground della Capitale!</p>
   </div>
 
   <!-- Mappa -->
   <div id="map"></div>
+
+  <!-- Script inizializzazione -->
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      mapboxgl.accessToken = 'pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lYnowZ3ZuMGN2YjJrcGxpZzlld3RnZSJ9.PdSpj6URxZSU3GWvgvFwRA';
+
+      const map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v12',
+        center: [12.4964, 41.9028], // Roma
+        zoom: 11
+      });
+
+      // Rendo la mappa disponibile a livello globale per gli altri file JS
+      window.map = map;
+    });
+  </script>
 
   <!-- Script con i dati dei luoghi -->
   <script src="places.js"></script>
