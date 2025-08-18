@@ -406,9 +406,28 @@
       containerEl.style.display = 'none';
       errorEl.style.display = 'none';
       
+      // Check cache first
+      const cacheKey = 'roma-matches-cache';
+      const cacheTimeKey = 'roma-matches-cache-time';
+      const cachedData = localStorage.getItem(cacheKey);
+      const cacheTime = localStorage.getItem(cacheTimeKey);
+      const now = new Date().getTime();
+      const oneDay = 24 * 60 * 60 * 1000; // 24 ore in millisecondi
+      
+      // Se i dati sono in cache e non sono scaduti (meno di 24 ore), usali
+      if (cachedData && cacheTime && (now - parseInt(cacheTime)) < oneDay) {
+        try {
+          const matches = JSON.parse(cachedData);
+          displayMatches(matches);
+          return;
+        } catch (e) {
+          // Se c'è un errore nel parsing, continua con l'API
+        }
+      }
+      
       try {
         // Using Football-Data.org FREE API for real AS Roma match data
-        // No API key required! Completely free service
+        // Aggiornamento automatico giornaliero
         const response = await fetch('https://api.football-data.org/v4/teams/100/matches?status=SCHEDULED&limit=5', {
           method: 'GET',
           headers: {
@@ -421,10 +440,26 @@
         }
         
         const data = await response.json();
-        displayMatches(data.matches || []);
+        const matches = data.matches || [];
+        
+        // Salva i dati in cache con timestamp
+        localStorage.setItem(cacheKey, JSON.stringify(matches));
+        localStorage.setItem(cacheTimeKey, now.toString());
+        
+        displayMatches(matches);
         
       } catch (error) {
         console.error('Error loading Roma matches:', error);
+        // Se c'è un errore e abbiamo dati in cache (anche scaduti), usali
+        if (cachedData) {
+          try {
+            const matches = JSON.parse(cachedData);
+            displayMatches(matches);
+            return;
+          } catch (e) {
+            // Se anche il cache fallisce, usa i dati mock
+          }
+        }
         // Show mock data as fallback
         displayMockMatches();
       }
@@ -543,7 +578,7 @@
         </div>
       `).join('');
       
-      containerEl.innerHTML = matchesHTML + '<p class="api-note">💡 <em>Dati di esempio - Configura API-Football per dati reali</em></p>';
+      containerEl.innerHTML = matchesHTML;
     }
     
     // Legacy support for old luoghi.js
