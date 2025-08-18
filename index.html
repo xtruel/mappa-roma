@@ -226,10 +226,16 @@
       });
       
       // Roma matches button
-      document.getElementById('roma-matches-btn').addEventListener('click', openRomaMatchesModal);
+      const romaMatchesBtn = document.getElementById('roma-matches-btn');
+      if (romaMatchesBtn) {
+        romaMatchesBtn.addEventListener('click', openRomaMatchesModal);
+      }
       
       // Modal close functionality
-      document.querySelector('.close-modal').addEventListener('click', closeRomaMatchesModal);
+      const closeModalBtn = document.querySelector('.close-modal');
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeRomaMatchesModal);
+      }
       window.addEventListener('click', (event) => {
         const modal = document.getElementById('roma-matches-modal');
         if (event.target === modal) {
