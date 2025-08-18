@@ -83,6 +83,44 @@ body {
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
+/* Roma Matches Button */
+.roma-matches-section {
+  margin: 20px 0;
+  text-align: center;
+}
+
+.roma-btn {
+  background: linear-gradient(135deg, #8B0000, #DC143C);
+  border: none;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 25px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bold;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  box-shadow: 0 4px 12px rgba(139, 0, 0, 0.3);
+}
+
+.roma-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(139, 0, 0, 0.4);
+  background: linear-gradient(135deg, #A00000, #FF1744);
+}
+
+.roma-icon {
+  font-size: 16px;
+}
+
+.roma-text {
+  font-weight: bold;
+}
+
 #sidebar h2 {
   font-size: 24px;
   margin-bottom: 10px;
