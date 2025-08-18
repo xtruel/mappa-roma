@@ -21,11 +21,15 @@
         <button id="lang-it" class="lang-btn" data-lang="it">IT</button>
       </div>
       
-      <!-- Roma Matches Button -->
+      <!-- Roma Matches Buttons -->
       <div class="roma-matches-section">
         <button id="roma-matches-btn" class="roma-btn">
           <span class="roma-icon">⚽</span>
           <span class="roma-text">Partite Roma</span>
+        </button>
+        <button id="roma-women-matches-btn" class="roma-btn roma-women-btn">
+          <span class="roma-icon">⚽</span>
+          <span class="roma-text">Roma Femminile</span>
         </button>
       </div>
     </div>
@@ -71,6 +75,21 @@
         <div id="matches-loading" class="loading">Caricamento partite...</div>
         <div id="matches-container" class="matches-list"></div>
         <div id="matches-error" class="error-message" style="display: none;">Errore nel caricamento delle partite. Riprova più tardi.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Roma Women Matches Modal -->
+  <div id="roma-women-matches-modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>👩‍⚽ AS Roma Femminile - Prossime Partite</h2>
+        <span class="close">&times;</span>
+      </div>
+      <div class="modal-body">
+        <div id="women-matches-loading" class="loading">Caricamento partite...</div>
+        <div id="women-matches-container" class="matches-list"></div>
+        <div id="women-matches-error" class="error-message" style="display: none;">Errore nel caricamento delle partite. Riprova più tardi.</div>
       </div>
     </div>
   </div>
@@ -231,27 +250,32 @@
         romaMatchesBtn.addEventListener('click', openRomaMatchesModal);
       }
       
-      // Modal close functionality
-      const closeModalBtn = document.querySelector('.close-modal');
-      if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', closeRomaMatchesModal);
+      // Roma women matches button
+      const romaWomenMatchesBtn = document.getElementById('roma-women-matches-btn');
+      if (romaWomenMatchesBtn) {
+        romaWomenMatchesBtn.addEventListener('click', openRomaWomenMatchesModal);
       }
-      window.addEventListener('click', (event) => {
-        const modal = document.getElementById('roma-matches-modal');
-        if (event.target === modal) {
-          closeRomaMatchesModal();
-        }
+      
+      // Modal close functionality
+      const closeModalBtns = document.querySelectorAll('.close');
+      closeModalBtns.forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          const modal = e.target.closest('.modal');
+          if (modal) {
+            modal.style.display = 'none';
+          }
+        });
       });
       
-      // Roma matches modal event listeners
-      document.getElementById('roma-matches-btn').addEventListener('click', openRomaMatchesModal);
-      document.querySelector('.close').addEventListener('click', closeRomaMatchesModal);
-      
-      // Close modal when clicking outside of it
+      // Close modals when clicking outside of them
       window.addEventListener('click', (event) => {
-        const modal = document.getElementById('roma-matches-modal');
-        if (event.target === modal) {
+        const romaModal = document.getElementById('roma-matches-modal');
+        const womenModal = document.getElementById('roma-women-matches-modal');
+        if (event.target === romaModal) {
           closeRomaMatchesModal();
+        }
+        if (event.target === womenModal) {
+          closeRomaWomenMatchesModal();
         }
       });
     }
@@ -396,7 +420,99 @@
       modal.style.display = 'none';
     }
     
-    async function loadRomaMatches() {
+    // Roma Women Matches Modal Functions
+    function openRomaWomenMatchesModal() {
+      const modal = document.getElementById('roma-women-matches-modal');
+      modal.style.display = 'block';
+      loadRomaWomenMatches();
+    }
+    
+    function closeRomaWomenMatchesModal() {
+       const modal = document.getElementById('roma-women-matches-modal');
+       modal.style.display = 'none';
+     }
+     
+     async function loadRomaWomenMatches() {
+       const loadingEl = document.getElementById('women-matches-loading');
+       const containerEl = document.getElementById('women-matches-container');
+       const errorEl = document.getElementById('women-matches-error');
+       
+       // Show loading, hide others
+       loadingEl.style.display = 'block';
+       containerEl.style.display = 'none';
+       errorEl.style.display = 'none';
+       
+       // Check cache first
+       const cacheKey = 'roma-women-matches-cache';
+       const cacheTimeKey = 'roma-women-matches-cache-time';
+       const cachedData = localStorage.getItem(cacheKey);
+       const cacheTime = localStorage.getItem(cacheTimeKey);
+       const now = new Date().getTime();
+       const oneDay = 24 * 60 * 60 * 1000; // 24 ore in millisecondi
+       
+       // Se i dati sono in cache e non sono scaduti (meno di 24 ore), usali
+       if (cachedData && cacheTime && (now - parseInt(cacheTime)) < oneDay) {
+         try {
+           const matches = JSON.parse(cachedData);
+           displayWomenMatches(matches);
+           return;
+         } catch (e) {
+           // Se c'è un errore nel parsing, continua con i dati mock
+         }
+       }
+       
+       try {
+         // Per ora usiamo dati mock per la Roma femminile
+         // In futuro si potrebbe integrare con un'API specifica per il calcio femminile
+         const mockWomenMatches = [
+           {
+             utcDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString(),
+             homeTeam: { name: 'AS Roma Femminile', crest: 'https://crests.football-data.org/100.png' },
+             awayTeam: { name: 'Juventus Women', crest: 'https://crests.football-data.org/109.png' },
+             competition: { name: 'Serie A Femminile' },
+             venue: 'Stadio Tre Fontane'
+           },
+           {
+             utcDate: new Date(Date.now() + 14 * 24 * 60 * 60 * 1000).toISOString(),
+             homeTeam: { name: 'Inter Women', crest: 'https://crests.football-data.org/108.png' },
+             awayTeam: { name: 'AS Roma Femminile', crest: 'https://crests.football-data.org/100.png' },
+             competition: { name: 'Serie A Femminile' },
+             venue: 'Stadio Breda'
+           },
+           {
+             utcDate: new Date(Date.now() + 21 * 24 * 60 * 60 * 1000).toISOString(),
+             homeTeam: { name: 'AS Roma Femminile', crest: 'https://crests.football-data.org/100.png' },
+             awayTeam: { name: 'AC Milan Women', crest: 'https://crests.football-data.org/98.png' },
+             competition: { name: 'Serie A Femminile' },
+             venue: 'Stadio Tre Fontane'
+           }
+         ];
+         
+         // Salva i dati in cache con timestamp
+         localStorage.setItem(cacheKey, JSON.stringify(mockWomenMatches));
+         localStorage.setItem(cacheTimeKey, now.toString());
+         
+         displayWomenMatches(mockWomenMatches);
+         
+       } catch (error) {
+         console.error('Error loading Roma women matches:', error);
+         // Se c'è un errore e abbiamo dati in cache (anche scaduti), usali
+         if (cachedData) {
+           try {
+             const matches = JSON.parse(cachedData);
+             displayWomenMatches(matches);
+             return;
+           } catch (e) {
+             // Se anche il cache fallisce, mostra errore
+           }
+         }
+         // Show error
+         loadingEl.style.display = 'none';
+         errorEl.style.display = 'block';
+       }
+     }
+     
+     async function loadRomaMatches() {
       const loadingEl = document.getElementById('matches-loading');
       const containerEl = document.getElementById('matches-container');
       const errorEl = document.getElementById('matches-error');
@@ -491,6 +607,61 @@
         });
         
         // Football-Data.org doesn't provide team logos, so we'll use a default football icon
+        const defaultLogo = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIHN0cm9rZT0iIzMzMzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMnoiIGZpbGw9Im5vbmUiLz4KPHA+PC9wPgo8L3N2Zz4K';
+        
+        return `
+          <div class="match-item">
+            <div class="match-date">
+              <span class="date">${formattedDate}</span>
+              <span class="time">${formattedTime}</span>
+            </div>
+            <div class="match-teams">
+              <div class="team home">
+                <img src="${match.homeTeam.crest || defaultLogo}" alt="${match.homeTeam.name}" class="team-logo" onerror="this.src='${defaultLogo}'">
+                <span class="team-name">${match.homeTeam.name}</span>
+              </div>
+              <div class="vs">VS</div>
+              <div class="team away">
+                <img src="${match.awayTeam.crest || defaultLogo}" alt="${match.awayTeam.name}" class="team-logo" onerror="this.src='${defaultLogo}'">
+                <span class="team-name">${match.awayTeam.name}</span>
+              </div>
+            </div>
+            <div class="match-venue">
+              <span class="venue">📍 ${match.venue || 'Stadio da definire'}</span>
+              <span class="competition">${match.competition.name}</span>
+            </div>
+          </div>
+        `;
+      }).join('');
+      
+      containerEl.innerHTML = matchesHTML;
+    }
+    
+    function displayWomenMatches(matches) {
+      const containerEl = document.getElementById('women-matches-container');
+      const loadingEl = document.getElementById('women-matches-loading');
+      
+      loadingEl.style.display = 'none';
+      containerEl.style.display = 'block';
+      
+      if (matches.length === 0) {
+        containerEl.innerHTML = '<p class="no-matches">Nessuna partita programmata al momento.</p>';
+        return;
+      }
+      
+      const matchesHTML = matches.map(match => {
+        const date = new Date(match.utcDate);
+        const formattedDate = date.toLocaleDateString('it-IT', {
+          weekday: 'long',
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric'
+        });
+        const formattedTime = date.toLocaleTimeString('it-IT', {
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
         const defaultLogo = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMTIiIGN5PSIxMiIgcj0iMTAiIHN0cm9rZT0iIzMzMzMzMyIgc3Ryb2tlLXdpZHRoPSIyIiBmaWxsPSJ3aGl0ZSIvPgo8cGF0aCBkPSJNMTIgMkM2LjQ4IDIgMiA2LjQ4IDIgMTJzNC40OCAxMCAxMCAxMCAxMC00LjQ4IDEwLTEwUzE3LjUyIDIgMTIgMnoiIGZpbGw9Im5vbmUiLz4KPHA+PC9wPgo8L3N2Zz4K';
         
         return `
