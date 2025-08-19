@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS tuo -->
-  <link rel="stylesheet" href="style.css?v=3">
+  <link rel="stylesheet" href="style.css?v=4">
 
   <!-- CSS Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
@@ -195,41 +195,41 @@
       return languageData[currentLanguage][key] || key;
     }
     
-    // Team logos mapping - Using original team logos from external sources
+    // Team logos mapping - Using reliable sources like Wikipedia and official sites
     const teamLogos = {
-      'AS Roma': 'https://logos-world.net/wp-content/uploads/2020/06/AS-Roma-Logo.png',
-      'Roma': 'https://logos-world.net/wp-content/uploads/2020/06/AS-Roma-Logo.png',
-      'SS Lazio': 'https://logos-world.net/wp-content/uploads/2020/06/Lazio-Logo.png',
-      'Lazio': 'https://logos-world.net/wp-content/uploads/2020/06/Lazio-Logo.png',
-      'S.S. Lazio': 'https://logos-world.net/wp-content/uploads/2020/06/Lazio-Logo.png',
-      'Juventus FC': 'https://logos-world.net/wp-content/uploads/2020/06/Juventus-Logo.png',
-      'Juventus': 'https://logos-world.net/wp-content/uploads/2020/06/Juventus-Logo.png',
-      'Juventus Women': 'https://logos-world.net/wp-content/uploads/2020/06/Juventus-Logo.png',
-      'AC Milan': 'https://logos-world.net/wp-content/uploads/2020/06/AC-Milan-Logo.png',
-      'Milan': 'https://logos-world.net/wp-content/uploads/2020/06/AC-Milan-Logo.png',
-      'AC Milan Women': 'https://logos-world.net/wp-content/uploads/2020/06/AC-Milan-Logo.png',
-      'FC Internazionale Milano': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
-      'Inter': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
-      'Inter Women': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
-      'Internazionale': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
-      'SSC Napoli': 'https://logos-world.net/wp-content/uploads/2020/06/Napoli-Logo.png',
-      'AS Roma Femminile': 'https://logos-world.net/wp-content/uploads/2020/06/AS-Roma-Logo.png',
-      'Genoa': 'https://logos-world.net/wp-content/uploads/2020/06/Genoa-Logo.png',
-      'Genoa CFC': 'https://logos-world.net/wp-content/uploads/2020/06/Genoa-Logo.png',
-      'Eintracht Frankfurt': 'https://logos-world.net/wp-content/uploads/2020/06/Eintracht-Frankfurt-Logo.png',
-      'Atalanta': 'https://logos-world.net/wp-content/uploads/2020/06/Atalanta-Logo.png',
-      'Atalanta BC': 'https://logos-world.net/wp-content/uploads/2020/06/Atalanta-Logo.png',
-      'Fiorentina': 'https://logos-world.net/wp-content/uploads/2020/06/Fiorentina-Logo.png',
-      'ACF Fiorentina': 'https://logos-world.net/wp-content/uploads/2020/06/Fiorentina-Logo.png',
-      'Torino': 'https://logos-world.net/wp-content/uploads/2020/06/Torino-Logo.png',
-      'Torino FC': 'https://logos-world.net/wp-content/uploads/2020/06/Torino-Logo.png',
-      'Bologna': 'https://logos-world.net/wp-content/uploads/2020/06/Bologna-Logo.png',
-      'Bologna FC': 'https://logos-world.net/wp-content/uploads/2020/06/Bologna-Logo.png',
-      'Udinese': 'https://logos-world.net/wp-content/uploads/2020/06/Udinese-Logo.png',
-      'Udinese Calcio': 'https://logos-world.net/wp-content/uploads/2020/06/Udinese-Logo.png'
+      'AS Roma': 'https://upload.wikimedia.org/wikipedia/en/f/f7/AS_Roma_logo_%282017%29.svg',
+      'Roma': 'https://upload.wikimedia.org/wikipedia/en/f/f7/AS_Roma_logo_%282017%29.svg',
+      'SS Lazio': 'https://upload.wikimedia.org/wikipedia/en/c/ce/S.S._Lazio_badge.svg',
+      'Lazio': 'https://upload.wikimedia.org/wikipedia/en/c/ce/S.S._Lazio_badge.svg',
+      'S.S. Lazio': 'https://upload.wikimedia.org/wikipedia/en/c/ce/S.S._Lazio_badge.svg',
+      'Juventus FC': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Juventus_FC_logo_%282017%29.svg',
+      'Juventus': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Juventus_FC_logo_%282017%29.svg',
+      'Juventus Women': 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Juventus_FC_logo_%282017%29.svg',
+      'AC Milan': 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg',
+      'Milan': 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg',
+      'AC Milan Women': 'https://upload.wikimedia.org/wikipedia/commons/d/d0/Logo_of_AC_Milan.svg',
+      'FC Internazionale Milano': 'https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg',
+      'Inter': 'https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg',
+      'Inter Women': 'https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg',
+      'Internazionale': 'https://upload.wikimedia.org/wikipedia/commons/0/05/FC_Internazionale_Milano_2021.svg',
+      'SSC Napoli': 'https://upload.wikimedia.org/wikipedia/commons/2/2d/SSC_Neapel.svg',
+      'AS Roma Femminile': 'https://upload.wikimedia.org/wikipedia/en/f/f7/AS_Roma_logo_%282017%29.svg',
+      'Genoa': 'https://upload.wikimedia.org/wikipedia/en/6/65/Genoa_CFC_logo.svg',
+      'Genoa CFC': 'https://upload.wikimedia.org/wikipedia/en/6/65/Genoa_CFC_logo.svg',
+      'Eintracht Frankfurt': 'https://upload.wikimedia.org/wikipedia/commons/0/04/Eintracht_Frankfurt_Logo.svg',
+      'Atalanta': 'https://upload.wikimedia.org/wikipedia/en/6/66/Atalanta_BC_logo.svg',
+      'Atalanta BC': 'https://upload.wikimedia.org/wikipedia/en/6/66/Atalanta_BC_logo.svg',
+      'Fiorentina': 'https://upload.wikimedia.org/wikipedia/commons/b/b2/ACF_Fiorentina_Logo.svg',
+      'ACF Fiorentina': 'https://upload.wikimedia.org/wikipedia/commons/b/b2/ACF_Fiorentina_Logo.svg',
+      'Torino': 'https://upload.wikimedia.org/wikipedia/en/2/2e/Torino_FC_Logo.svg',
+      'Torino FC': 'https://upload.wikimedia.org/wikipedia/en/2/2e/Torino_FC_Logo.svg',
+      'Bologna': 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Bologna_FC_1909_logo.svg',
+      'Bologna FC': 'https://upload.wikimedia.org/wikipedia/commons/8/8d/Bologna_FC_1909_logo.svg',
+      'Udinese': 'https://upload.wikimedia.org/wikipedia/en/c/ce/Udinese_Calcio_logo.svg',
+      'Udinese Calcio': 'https://upload.wikimedia.org/wikipedia/en/c/ce/Udinese_Calcio_logo.svg'
     };
     
-    const defaultLogo = 'https://via.placeholder.com/32x16/cccccc/666666?text=⚽';
+    const defaultLogo = 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjMyIiBoZWlnaHQ9IjMyIiByeD0iNCIgZmlsbD0iI2NjY2NjYyIvPgo8dGV4dCB4PSIxNiIgeT0iMjAiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZm9udC13ZWlnaHQ9ImJvbGQiIGZpbGw9IiM2NjY2NjYiIHRleHQtYW5jaG9yPSJtaWRkbGUiPj48L3RleHQ+Cjwvc3ZnPgo=';
     
     function getTeamLogo(teamName) {
       return teamLogos[teamName] || defaultLogo;
