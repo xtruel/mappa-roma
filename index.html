@@ -195,44 +195,49 @@
       return languageData[currentLanguage][key] || key;
     }
     
-    // Team logos mapping - Global definition
+    // Team logos mapping - Using CSS-based logos for better performance
     const teamLogos = {
-      'AS Roma': 'https://via.placeholder.com/32x32/FFCC00/8B0000?text=R',
-      'Roma': 'https://via.placeholder.com/32x32/FFCC00/8B0000?text=R',
-      'SS Lazio': 'https://via.placeholder.com/32x32/87CEEB/004688?text=L',
-      'Lazio': 'https://via.placeholder.com/32x32/87CEEB/004688?text=L',
-      'S.S. Lazio': 'https://via.placeholder.com/32x32/87CEEB/004688?text=L',
-      'Juventus FC': 'https://via.placeholder.com/32x32/000000/ffffff?text=J',
-      'Juventus': 'https://via.placeholder.com/32x32/000000/ffffff?text=J',
-      'Juventus Women': 'https://via.placeholder.com/32x32/000000/ffffff?text=J',
-      'AC Milan': 'https://via.placeholder.com/32x32/FF0000/ffffff?text=M',
-      'Milan': 'https://via.placeholder.com/32x32/FF0000/ffffff?text=M',
-      'AC Milan Women': 'https://via.placeholder.com/32x32/FF0000/ffffff?text=M',
-      'FC Internazionale Milano': 'https://via.placeholder.com/32x32/004888/ffffff?text=I',
-      'Inter': 'https://via.placeholder.com/32x32/004888/ffffff?text=I',
-      'Inter Women': 'https://via.placeholder.com/32x32/004888/ffffff?text=I',
-      'Internazionale': 'https://via.placeholder.com/32x32/004888/ffffff?text=I',
-      'SSC Napoli': 'https://via.placeholder.com/32x32/007FFF/ffffff?text=N',
-      'AS Roma Femminile': 'https://via.placeholder.com/32x32/FFCC00/8B0000?text=R',
-      'Genoa': 'https://via.placeholder.com/32x32/FF0000/ffffff?text=G',
-      'Genoa CFC': 'https://via.placeholder.com/32x32/FF0000/ffffff?text=G',
-      'Eintracht Frankfurt': 'https://via.placeholder.com/32x32/000000/ffffff?text=E',
-      'Atalanta': 'https://via.placeholder.com/32x32/1E90FF/000000?text=A',
-      'Atalanta BC': 'https://via.placeholder.com/32x32/1E90FF/000000?text=A',
-      'Fiorentina': 'https://via.placeholder.com/32x32/800080/ffffff?text=F',
-      'ACF Fiorentina': 'https://via.placeholder.com/32x32/800080/ffffff?text=F',
-      'Torino': 'https://via.placeholder.com/32x32/8B0000/ffffff?text=T',
-      'Torino FC': 'https://via.placeholder.com/32x32/8B0000/ffffff?text=T',
-      'Bologna': 'https://via.placeholder.com/32x32/FF0000/0000FF?text=B',
-      'Bologna FC': 'https://via.placeholder.com/32x32/FF0000/0000FF?text=B',
-      'Udinese': 'https://via.placeholder.com/32x32/000000/ffffff?text=U',
-      'Udinese Calcio': 'https://via.placeholder.com/32x32/000000/ffffff?text=U'
+      'AS Roma': { bg: '#FFCC00', color: '#8B0000', text: 'R' },
+      'Roma': { bg: '#FFCC00', color: '#8B0000', text: 'R' },
+      'SS Lazio': { bg: '#87CEEB', color: '#004688', text: 'L' },
+      'Lazio': { bg: '#87CEEB', color: '#004688', text: 'L' },
+      'S.S. Lazio': { bg: '#87CEEB', color: '#004688', text: 'L' },
+      'Juventus FC': { bg: '#000000', color: '#ffffff', text: 'J' },
+      'Juventus': { bg: '#000000', color: '#ffffff', text: 'J' },
+      'Juventus Women': { bg: '#000000', color: '#ffffff', text: 'J' },
+      'AC Milan': { bg: '#FF0000', color: '#ffffff', text: 'M' },
+      'Milan': { bg: '#FF0000', color: '#ffffff', text: 'M' },
+      'AC Milan Women': { bg: '#FF0000', color: '#ffffff', text: 'M' },
+      'FC Internazionale Milano': { bg: '#004888', color: '#ffffff', text: 'I' },
+      'Inter': { bg: '#004888', color: '#ffffff', text: 'I' },
+      'Inter Women': { bg: '#004888', color: '#ffffff', text: 'I' },
+      'Internazionale': { bg: '#004888', color: '#ffffff', text: 'I' },
+      'SSC Napoli': { bg: '#007FFF', color: '#ffffff', text: 'N' },
+      'AS Roma Femminile': { bg: '#FFCC00', color: '#8B0000', text: 'R' },
+      'Genoa': { bg: '#FF0000', color: '#ffffff', text: 'G' },
+      'Genoa CFC': { bg: '#FF0000', color: '#ffffff', text: 'G' },
+      'Eintracht Frankfurt': { bg: '#000000', color: '#ffffff', text: 'E' },
+      'Atalanta': { bg: '#1E90FF', color: '#000000', text: 'A' },
+      'Atalanta BC': { bg: '#1E90FF', color: '#000000', text: 'A' },
+      'Fiorentina': { bg: '#800080', color: '#ffffff', text: 'F' },
+      'ACF Fiorentina': { bg: '#800080', color: '#ffffff', text: 'F' },
+      'Torino': { bg: '#8B0000', color: '#ffffff', text: 'T' },
+      'Torino FC': { bg: '#8B0000', color: '#ffffff', text: 'T' },
+      'Bologna': { bg: '#FF0000', color: '#0000FF', text: 'B' },
+      'Bologna FC': { bg: '#FF0000', color: '#0000FF', text: 'B' },
+      'Udinese': { bg: '#000000', color: '#ffffff', text: 'U' },
+      'Udinese Calcio': { bg: '#000000', color: '#ffffff', text: 'U' }
     };
     
-    const defaultLogo = 'https://via.placeholder.com/32x32/cccccc/666666?text=%E2%9A%BD';
+    const defaultLogo = { bg: '#cccccc', color: '#666666', text: '⚽' };
     
     function getTeamLogo(teamName) {
       return teamLogos[teamName] || defaultLogo;
+    }
+    
+    function createTeamLogoElement(teamName, className = 'team-logo') {
+      const logoData = getTeamLogo(teamName);
+      return `<div class="${className}" style="background-color: ${logoData.bg}; color: ${logoData.color}; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px; width: 32px; height: 32px; border-radius: 4px; margin-right: 8px;">${logoData.text}</div>`;
     }
     
     // Initialize application
@@ -579,8 +584,6 @@
           minute: '2-digit'
         });
         
-        const homeLogo = getTeamLogo(match.homeTeam.name);
-        const awayLogo = getTeamLogo(match.awayTeam.name);
         const venue = match.venue || 'Stadio da definire';
         const competition = match.competition.name;
         
@@ -591,12 +594,12 @@
         matchesHTML += '</div>';
         matchesHTML += '<div class="match-teams">';
         matchesHTML += '<div class="team home">';
-        matchesHTML += '<img src="' + homeLogo + '" alt="' + match.homeTeam.name + '" class="team-logo" onerror="this.src=\'' + defaultLogo + '\'">';
+        matchesHTML += createTeamLogoElement(match.homeTeam.name);
         matchesHTML += '<span class="team-name">' + match.homeTeam.name + '</span>';
         matchesHTML += '</div>';
         matchesHTML += '<div class="vs">VS</div>';
         matchesHTML += '<div class="team away">';
-        matchesHTML += '<img src="' + awayLogo + '" alt="' + match.awayTeam.name + '" class="team-logo" onerror="this.src=\'' + defaultLogo + '\'">';
+        matchesHTML += createTeamLogoElement(match.awayTeam.name);
         matchesHTML += '<span class="team-name">' + match.awayTeam.name + '</span>';
         matchesHTML += '</div>';
         matchesHTML += '</div>';
@@ -649,8 +652,6 @@
       
       for (let i = 0; i < mockMatches.length; i++) {
         const match = mockMatches[i];
-        const homeLogo = getTeamLogo(match.homeTeam);
-        const awayLogo = getTeamLogo(match.awayTeam);
         
         matchesHTML += '<div class="match-item">';
         matchesHTML += '<div class="match-date">';
@@ -659,12 +660,12 @@
         matchesHTML += '</div>';
         matchesHTML += '<div class="match-teams">';
         matchesHTML += '<div class="team home">';
-        matchesHTML += '<img src="' + homeLogo + '" alt="' + match.homeTeam + '" class="team-logo" onerror="this.src=\'' + defaultLogo + '\'">';
+        matchesHTML += createTeamLogoElement(match.homeTeam);
         matchesHTML += '<span class="team-name">' + match.homeTeam + '</span>';
         matchesHTML += '</div>';
         matchesHTML += '<div class="vs">VS</div>';
         matchesHTML += '<div class="team away">';
-        matchesHTML += '<img src="' + awayLogo + '" alt="' + match.awayTeam + '" class="team-logo" onerror="this.src=\'' + defaultLogo + '\'">';
+        matchesHTML += createTeamLogoElement(match.awayTeam);
         matchesHTML += '<span class="team-name">' + match.awayTeam + '</span>';
         matchesHTML += '</div>';
         matchesHTML += '</div>';
@@ -776,20 +777,17 @@
         const showMapButton = match.venueId ? 
           `<button class="show-on-map-btn" onclick="showVenueOnMap(${match.venueId})">${getTranslation('showOnMap')}</button>` : '';
         
-        const homeLogo = getTeamLogo(match.homeTeam);
-        const awayLogo = getTeamLogo(match.awayTeam);
-        
         return `
           <div class="match-item">
             <div class="match-date">${formatMatchDate(match.date, match.time)}</div>
             <div class="match-teams">
               <div class="team home">
-                <img src="${homeLogo}" alt="${match.homeTeam}" class="team-logo" onerror="this.src='${defaultLogo}'">
+                ${createTeamLogoElement(match.homeTeam)}
                 <span class="team-name">${match.homeTeam}</span>
               </div>
               <div class="vs">VS</div>
               <div class="team away">
-                <img src="${awayLogo}" alt="${match.awayTeam}" class="team-logo" onerror="this.src='${defaultLogo}'">
+                ${createTeamLogoElement(match.awayTeam)}
                 <span class="team-name">${match.awayTeam}</span>
               </div>
             </div>

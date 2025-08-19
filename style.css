@@ -579,7 +579,12 @@ body {
   height: 32px;
   margin-right: 8px;
   border-radius: 4px;
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  flex-shrink: 0;
 }
 
 .team-name {
