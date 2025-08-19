@@ -766,3 +766,8 @@ body {
 .embedded #sidebar::after {
   display: none !important;
 }
+
+/* Embedded mode layout for map */
+.embedded .map-container {
+  width: 100vw !important;
+}
