@@ -405,6 +405,18 @@ body {
   font-size: 16px;
 }
 
+/* Loading in sidebar - smaller and positioned at bottom */
+#sidebar .loading {
+  height: auto;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 10px;
+  margin-top: 15px;
+  border-radius: 8px;
+  font-size: 14px;
+  backdrop-filter: blur(5px);
+}
+
 /* Roma Matches Modal Styles */
 .modal {
   display: none;
@@ -478,13 +490,25 @@ body {
   overflow-y: auto;
 }
 
-.loading {
+.modal .loading {
   text-align: center;
   padding: 40px;
   color: #666;
 }
 
-.loading::after {
+#sidebar .loading::after {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-left: 8px;
+}
+
+.modal .loading::after {
   content: '';
   display: inline-block;
   width: 20px;
