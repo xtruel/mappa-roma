@@ -3,7 +3,7 @@ const languageData = {
     en: {
         // Page title and meta
         pageTitle: "Mappa Roma - Interactive Map of Rome",
-        pageDescription: "Discover Rome's best attractions with our interactive map featuring 70+ landmarks, monuments, and hidden gems.",
+        pageDescription: "Discover Rome's best attractions with our interactive map featuring 76+ landmarks, monuments, and hidden gems.",
         
         // Header and main UI
         siteTitle: "Mappa Roma",
@@ -17,15 +17,25 @@ const languageData = {
         // Category filter
         categoryFilter: "Filter by Category",
         categories: {
-            all: "All Categories",
+            all: "All Places (76)",
             ancientSites: "Ancient Sites",
             vaticanReligious: "Vatican & Religious",
             fountainsSquares: "Fountains & Squares",
             museumsGalleries: "Museums & Galleries",
             parksGardens: "Parks & Gardens",
             neighborhoods: "Neighborhoods",
-            hiddenGems: "Hidden Gems"
+            hiddenGems: "Hidden Gems",
+            footballVenues: "Football Venues"
         },
+        
+        // Match information
+        upcomingMatches: "Upcoming Matches",
+        menMatches: "Men's Matches",
+        womenMatches: "Women's Matches",
+        venue: "Venue",
+        address: "Address",
+        showOnMap: "Show on Map",
+        noUpcomingMatches: "No upcoming matches scheduled",
         
         // Places counter
         placesShowing: "places showing",
@@ -57,7 +67,7 @@ const languageData = {
     it: {
         // Page title and meta
         pageTitle: "Mappa Roma - Mappa Interattiva di Roma",
-        pageDescription: "Scopri le migliori attrazioni di Roma con la nostra mappa interattiva con oltre 70 monumenti, luoghi storici e gemme nascoste.",
+        pageDescription: "Scopri le migliori attrazioni di Roma con la nostra mappa interattiva con oltre 76 monumenti, luoghi storici e gemme nascoste.",
         
         // Header and main UI
         siteTitle: "Mappa Roma",
@@ -71,15 +81,25 @@ const languageData = {
         // Category filter
         categoryFilter: "Filtra per Categoria",
         categories: {
-            all: "Tutte le Categorie",
+            all: "Tutti i Luoghi (76)",
             ancientSites: "Siti Antichi",
             vaticanReligious: "Vaticano e Religiosi",
             fountainsSquares: "Fontane e Piazze",
             museumsGalleries: "Musei e Gallerie",
             parksGardens: "Parchi e Giardini",
             neighborhoods: "Quartieri",
-            hiddenGems: "Gemme Nascoste"
+            hiddenGems: "Gemme Nascoste",
+            footballVenues: "Impianti Calcistici"
         },
+        
+        // Match information
+        upcomingMatches: "Prossime Partite",
+        menMatches: "Partite Maschili",
+        womenMatches: "Partite Femminili",
+        venue: "Stadio",
+        address: "Indirizzo",
+        showOnMap: "Mostra sulla Mappa",
+        noUpcomingMatches: "Nessuna partita in programma",
         
         // Places counter
         placesShowing: "luoghi visualizzati",

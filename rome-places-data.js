@@ -1,4 +1,4 @@
-// Comprehensive data for 70 best Rome places with coordinates and descriptions
+// Comprehensive data for 76 best Rome places with coordinates and descriptions
 const romePlaces = [
   // Major Ancient Sites
   {
@@ -1064,6 +1064,103 @@ const romePlaces = [
       it: "Residenza estiva papale che si affaccia sul Lago Albano"
     },
     image: "https://images.unsplash.com/photo-1552832230-c0197dd311b5?w=400"
+  },
+  // Football Venues
+  {
+    id: 71,
+    name: {
+      en: "Stadio Olimpico",
+      it: "Stadio Olimpico"
+    },
+    lat: 41.9342,
+    lng: 12.4549,
+    category: "Football Venues",
+    description: {
+      en: "Rome's main stadium, home to AS Roma and SS Lazio. Capacity: 70,634. Address: Viale dei Gladiatori 2, 00135 Roma",
+      it: "Stadio principale di Roma, casa di AS Roma e SS Lazio. Capienza: 70.634. Indirizzo: Viale dei Gladiatori 2, 00135 Roma"
+    },
+    image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400",
+    address: "Viale dei Gladiatori 2, 00135 Roma"
+  },
+  {
+    id: 72,
+    name: {
+      en: "Centro Sportivo Fulvio Bernardini",
+      it: "Centro Sportivo Fulvio Bernardini"
+    },
+    lat: 41.8089,
+    lng: 12.6118,
+    category: "Football Venues",
+    description: {
+      en: "AS Roma's training center in Trigoria. Address: Piazzale Dino Viola 1, 00118 Roma",
+      it: "Centro di allenamento dell'AS Roma a Trigoria. Indirizzo: Piazzale Dino Viola 1, 00118 Roma"
+    },
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400",
+    address: "Piazzale Dino Viola 1, 00118 Roma"
+  },
+  {
+    id: 73,
+    name: {
+      en: "Stadio Tre Fontane",
+      it: "Stadio Tre Fontane"
+    },
+    lat: 41.8156,
+    lng: 12.4742,
+    category: "Football Venues",
+    description: {
+      en: "Home stadium of AS Roma Women and Roma Primavera. Address: Via Acque Salvie 1, 00142 Roma",
+      it: "Stadio di casa della Roma Femminile e Roma Primavera. Indirizzo: Via Acque Salvie 1, 00142 Roma"
+    },
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400",
+    address: "Via Acque Salvie 1, 00142 Roma"
+  },
+  {
+    id: 74,
+    name: {
+      en: "SS Lazio Training Center",
+      it: "Centro Sportivo SS Lazio"
+    },
+    lat: 41.8234,
+    lng: 12.6089,
+    category: "Football Venues",
+    description: {
+      en: "SS Lazio's training facility in Formello. Address: Via di Santa Cornelia 1000, 00060 Formello",
+      it: "Centro di allenamento della SS Lazio a Formello. Indirizzo: Via di Santa Cornelia 1000, 00060 Formello"
+    },
+    image: "https://images.unsplash.com/photo-1574629810360-7efbbe195018?w=400",
+    address: "Via di Santa Cornelia 1000, 00060 Formello"
+  },
+  {
+    id: 75,
+    name: {
+      en: "Stadio Flaminio",
+      it: "Stadio Flaminio"
+    },
+    lat: 41.9267,
+    lng: 12.4733,
+    category: "Football Venues",
+    description: {
+      en: "Historic stadium designed by Pier Luigi Nervi, former home of AS Roma. Address: Viale Pilsudski, 00196 Roma",
+      it: "Stadio storico progettato da Pier Luigi Nervi, ex casa dell'AS Roma. Indirizzo: Viale Pilsudski, 00196 Roma"
+    },
+    image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400",
+    address: "Viale Pilsudski, 00196 Roma"
+  },
+  {
+    id: 76,
+    name: {
+      en: "Stadio Testaccio",
+      it: "Stadio Testaccio"
+    },
+    lat: 41.8756,
+    lng: 12.4756,
+    category: "Football Venues",
+    description: {
+      en: "Former AS Roma stadium (1929-1940), now a public park. Address: Via Zabaglia, 00153 Roma",
+      it: "Ex stadio dell'AS Roma (1929-1940), ora parco pubblico. Indirizzo: Via Zabaglia, 00153 Roma"
+    },
+    image: "https://images.unsplash.com/photo-1431324155629-1a6deb1dec8d?w=400",
+    address: "Via Zabaglia, 00153 Roma"
   }
 ];
 

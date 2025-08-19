@@ -2,8 +2,17 @@ name = "mappa-roma"
 compatibility_date = "2023-12-01"
 pages_build_output_dir = "./"
 
+# GitHub Pages configuration
+[build]
+command = ""
+publish = "./"
+
 [env.production]
 name = "mappa-roma"
 
 [env.preview]
 name = "mappa-roma-preview"
+
+# Custom domain configuration for GitHub Pages
+# Replace with your actual GitHub Pages URL
+# Example: https://xtruelgithub.github.io/mappa-roma/
