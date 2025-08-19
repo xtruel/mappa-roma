@@ -26,6 +26,17 @@ body {
   overflow-y: auto;
   z-index: 1000;
 }
+/* Vertical separator line to visually disjoin sidebar from map */
+#sidebar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -1px; /* sit on the edge without affecting layout */
+  width: 1px;
+  height: 100%;
+  background: linear-gradient(to bottom, rgba(0,0,0,0.25), rgba(0,0,0,0.05));
+  pointer-events: none;
+}
 
 .sidebar-header {
   margin-bottom: 25px;
