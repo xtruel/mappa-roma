@@ -847,5 +847,35 @@
       });
     }
   </script>
+  <script>
+    // Detect if embedded (inside an iframe) and add .embedded class
+    (function() {
+      try {
+        if (window.self !== window.top) {
+          document.body.classList.add('embedded');
+        }
+      } catch (e) {
+        // Cross-origin iframes will throw; assume embedded
+        document.body.classList.add('embedded');
+      }
+      
+      // When embedded, ensure map containers are full-width
+      const applyEmbeddedLayout = () => {
+        if (document.body.classList.contains('embedded')) {
+          document.querySelectorAll('.map-container').forEach(el => {
+            el.style.marginLeft = '0';
+            el.style.width = '100vw';
+          });
+        }
+      };
+      
+      // Apply on DOM ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', applyEmbeddedLayout);
+      } else {
+        applyEmbeddedLayout();
+      }
+    })();
+  </script>
 </body>
 </html>

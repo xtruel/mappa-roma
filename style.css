@@ -760,3 +760,9 @@ body {
 #sidebar::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.5);
 }
+
+/* Embedded mode: hide sidebar when inside an iframe */
+.embedded #sidebar,
+.embedded #sidebar::after {
+  display: none !important;
+}
