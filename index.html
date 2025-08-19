@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <!-- CSS tuo -->
-  <link rel="stylesheet" href="style.css?v=2">
+  <link rel="stylesheet" href="style.css?v=3">
 
   <!-- CSS Mapbox -->
   <link href="https://api.mapbox.com/mapbox-gl-js/v3.0.1/mapbox-gl.css" rel="stylesheet">
@@ -195,49 +195,49 @@
       return languageData[currentLanguage][key] || key;
     }
     
-    // Team logos mapping - Using CSS-based logos for better performance
+    // Team logos mapping - Using original team logos from external sources
     const teamLogos = {
-      'AS Roma': { bg: '#FFCC00', color: '#8B0000', text: 'R' },
-      'Roma': { bg: '#FFCC00', color: '#8B0000', text: 'R' },
-      'SS Lazio': { bg: '#87CEEB', color: '#004688', text: 'L' },
-      'Lazio': { bg: '#87CEEB', color: '#004688', text: 'L' },
-      'S.S. Lazio': { bg: '#87CEEB', color: '#004688', text: 'L' },
-      'Juventus FC': { bg: '#000000', color: '#ffffff', text: 'J' },
-      'Juventus': { bg: '#000000', color: '#ffffff', text: 'J' },
-      'Juventus Women': { bg: '#000000', color: '#ffffff', text: 'J' },
-      'AC Milan': { bg: '#FF0000', color: '#ffffff', text: 'M' },
-      'Milan': { bg: '#FF0000', color: '#ffffff', text: 'M' },
-      'AC Milan Women': { bg: '#FF0000', color: '#ffffff', text: 'M' },
-      'FC Internazionale Milano': { bg: '#004888', color: '#ffffff', text: 'I' },
-      'Inter': { bg: '#004888', color: '#ffffff', text: 'I' },
-      'Inter Women': { bg: '#004888', color: '#ffffff', text: 'I' },
-      'Internazionale': { bg: '#004888', color: '#ffffff', text: 'I' },
-      'SSC Napoli': { bg: '#007FFF', color: '#ffffff', text: 'N' },
-      'AS Roma Femminile': { bg: '#FFCC00', color: '#8B0000', text: 'R' },
-      'Genoa': { bg: '#FF0000', color: '#ffffff', text: 'G' },
-      'Genoa CFC': { bg: '#FF0000', color: '#ffffff', text: 'G' },
-      'Eintracht Frankfurt': { bg: '#000000', color: '#ffffff', text: 'E' },
-      'Atalanta': { bg: '#1E90FF', color: '#000000', text: 'A' },
-      'Atalanta BC': { bg: '#1E90FF', color: '#000000', text: 'A' },
-      'Fiorentina': { bg: '#800080', color: '#ffffff', text: 'F' },
-      'ACF Fiorentina': { bg: '#800080', color: '#ffffff', text: 'F' },
-      'Torino': { bg: '#8B0000', color: '#ffffff', text: 'T' },
-      'Torino FC': { bg: '#8B0000', color: '#ffffff', text: 'T' },
-      'Bologna': { bg: '#FF0000', color: '#0000FF', text: 'B' },
-      'Bologna FC': { bg: '#FF0000', color: '#0000FF', text: 'B' },
-      'Udinese': { bg: '#000000', color: '#ffffff', text: 'U' },
-      'Udinese Calcio': { bg: '#000000', color: '#ffffff', text: 'U' }
+      'AS Roma': 'https://logos-world.net/wp-content/uploads/2020/06/AS-Roma-Logo.png',
+      'Roma': 'https://logos-world.net/wp-content/uploads/2020/06/AS-Roma-Logo.png',
+      'SS Lazio': 'https://logos-world.net/wp-content/uploads/2020/06/Lazio-Logo.png',
+      'Lazio': 'https://logos-world.net/wp-content/uploads/2020/06/Lazio-Logo.png',
+      'S.S. Lazio': 'https://logos-world.net/wp-content/uploads/2020/06/Lazio-Logo.png',
+      'Juventus FC': 'https://logos-world.net/wp-content/uploads/2020/06/Juventus-Logo.png',
+      'Juventus': 'https://logos-world.net/wp-content/uploads/2020/06/Juventus-Logo.png',
+      'Juventus Women': 'https://logos-world.net/wp-content/uploads/2020/06/Juventus-Logo.png',
+      'AC Milan': 'https://logos-world.net/wp-content/uploads/2020/06/AC-Milan-Logo.png',
+      'Milan': 'https://logos-world.net/wp-content/uploads/2020/06/AC-Milan-Logo.png',
+      'AC Milan Women': 'https://logos-world.net/wp-content/uploads/2020/06/AC-Milan-Logo.png',
+      'FC Internazionale Milano': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
+      'Inter': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
+      'Inter Women': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
+      'Internazionale': 'https://logos-world.net/wp-content/uploads/2020/06/Inter-Milan-Logo.png',
+      'SSC Napoli': 'https://logos-world.net/wp-content/uploads/2020/06/Napoli-Logo.png',
+      'AS Roma Femminile': 'https://logos-world.net/wp-content/uploads/2020/06/AS-Roma-Logo.png',
+      'Genoa': 'https://logos-world.net/wp-content/uploads/2020/06/Genoa-Logo.png',
+      'Genoa CFC': 'https://logos-world.net/wp-content/uploads/2020/06/Genoa-Logo.png',
+      'Eintracht Frankfurt': 'https://logos-world.net/wp-content/uploads/2020/06/Eintracht-Frankfurt-Logo.png',
+      'Atalanta': 'https://logos-world.net/wp-content/uploads/2020/06/Atalanta-Logo.png',
+      'Atalanta BC': 'https://logos-world.net/wp-content/uploads/2020/06/Atalanta-Logo.png',
+      'Fiorentina': 'https://logos-world.net/wp-content/uploads/2020/06/Fiorentina-Logo.png',
+      'ACF Fiorentina': 'https://logos-world.net/wp-content/uploads/2020/06/Fiorentina-Logo.png',
+      'Torino': 'https://logos-world.net/wp-content/uploads/2020/06/Torino-Logo.png',
+      'Torino FC': 'https://logos-world.net/wp-content/uploads/2020/06/Torino-Logo.png',
+      'Bologna': 'https://logos-world.net/wp-content/uploads/2020/06/Bologna-Logo.png',
+      'Bologna FC': 'https://logos-world.net/wp-content/uploads/2020/06/Bologna-Logo.png',
+      'Udinese': 'https://logos-world.net/wp-content/uploads/2020/06/Udinese-Logo.png',
+      'Udinese Calcio': 'https://logos-world.net/wp-content/uploads/2020/06/Udinese-Logo.png'
     };
     
-    const defaultLogo = { bg: '#cccccc', color: '#666666', text: '⚽' };
+    const defaultLogo = 'https://via.placeholder.com/32x16/cccccc/666666?text=⚽';
     
     function getTeamLogo(teamName) {
       return teamLogos[teamName] || defaultLogo;
     }
     
     function createTeamLogoElement(teamName, className = 'team-logo') {
-      const logoData = getTeamLogo(teamName);
-      return `<div class="${className}" style="background-color: ${logoData.bg}; color: ${logoData.color}; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 12px; width: 32px; height: 16px; border-radius: 4px; margin-right: 8px;">${logoData.text}</div>`;
+      const logoUrl = getTeamLogo(teamName);
+      return `<img class="${className}" src="${logoUrl}" alt="${teamName}" style="width: 32px; height: 16px; object-fit: contain; border-radius: 4px; margin-right: 8px;" onerror="this.src='${defaultLogo}'"/>`;
     }
     
     // Initialize application

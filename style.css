@@ -579,12 +579,9 @@ body {
   height: 16px;
   margin-right: 8px;
   border-radius: 4px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 12px;
+  object-fit: contain;
   flex-shrink: 0;
+  background-color: transparent;
 }
 
 .team-name {
