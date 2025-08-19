@@ -576,14 +576,14 @@ body {
 
 .team-logo {
   width: 32px;
-  height: 32px;
+  height: 16px;
   margin-right: 8px;
   border-radius: 4px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   font-weight: bold;
-  font-size: 14px;
+  font-size: 12px;
   flex-shrink: 0;
 }
 
