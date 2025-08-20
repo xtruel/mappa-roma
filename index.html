@@ -258,53 +258,33 @@
       console.log("Container element:", document.getElementById("mapbox-map"));
       
       try {
-        // Try custom style first
+        // Use guaranteed working public style immediately
         mapboxMap = new mapboxgl.Map({
           container: "mapbox-map",
-          style: "mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha",
+          style: "mapbox://styles/mapbox/streets-v12",
           center: [12.4964, 41.9028],
           zoom: 11
         });
         
-        console.log("Mapbox map created successfully with custom style:", mapboxMap);
-        
-        // Add error handling
-        mapboxMap.on("error", (e) => {
-          console.error("Mapbox error with custom style:", e);
-          // Fallback to public style if custom fails
-          console.log("Falling back to public style...");
-          mapboxMap.setStyle("mapbox://styles/mapbox/streets-v12");
-        });
+        console.log("Mapbox map created successfully with public style:", mapboxMap);
         
         mapboxMap.on("load", () => {
           console.log("Map loaded successfully!");
+          // Try to switch to custom style after public style loads
+          setTimeout(() => {
+            try {
+              console.log("Attempting to switch to custom style...");
+              mapboxMap.setStyle("mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha");
+            } catch (styleError) {
+              console.log("Custom style failed, keeping public style:", styleError);
+            }
+          }, 2000);
         });
         
         mapboxMap.addControl(new mapboxgl.NavigationControl());
         
-        // If custom style doesn't load within 5 seconds, fallback
-        setTimeout(() => {
-          if (!mapboxMap.isStyleLoaded()) {
-            console.log("Custom style not loaded, using fallback...");
-            mapboxMap.setStyle("mapbox://styles/mapbox/streets-v12");
-          }
-        }, 5000);
-        
       } catch (error) {
         console.error("Failed to create Mapbox map:", error);
-        // Create with fallback style if custom fails
-        try {
-          mapboxMap = new mapboxgl.Map({
-            container: "mapbox-map",
-            style: "mapbox://styles/mapbox/streets-v12",
-            center: [12.4964, 41.9028],
-            zoom: 11
-          });
-          console.log("Fallback map created successfully");
-          mapboxMap.addControl(new mapboxgl.NavigationControl());
-        } catch (fallbackError) {
-          console.error("Even fallback failed:", fallbackError);
-        }
       }
     }
     
