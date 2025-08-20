@@ -1,0 +1,10 @@
+[33m5d870e3[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m Try older Mapbox v2.15.0 for better compatibility and different styles
+[33m7519eef[m Fix 401 error: use working public token and accessible Mapbox style
+[33mdc3760a[m Restore original custom Mapbox style and token with proper fallbacks
+[33m89a89d8[m Add aggressive fallback styles and better error handling for map loading
+[33me5fcbff[m Add CSS debugging to identify map container visibility issues
+[33m8a44956[m Add debugging and try different Mapbox style for map loading
+[33md3a3901[m Add cache-busting parameters to force fresh map loading
+[33mb23bb8c[m Fix map loading: update Mapbox token and improve error handling
+[33ma4a0e11[m Update project files for deployment
+[33mfd3e79a[m Embedded CSS: ensure map containers are 100vw when embedded
