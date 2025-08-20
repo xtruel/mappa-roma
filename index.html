@@ -251,35 +251,16 @@
     
     // Initialize Mapbox
     function initMapbox() {
-      // Using OpenStreetMap style - no token required!
-      mapboxgl.accessToken = "pk.test"; // Dummy token for OSM
+      // Using your original working custom style!
+      mapboxgl.accessToken = "pk.eyJ1IjoiZnVyaWVyb21hbmUiLCJhIjoiY21lanVmMWVnMDFsdjJrczc2Mm12Y3QyNyJ9.J1I-1msTs5pOeccQAuQ4yg";
       
-      console.log("Creating Mapbox map with OpenStreetMap...");
+      console.log("Creating Mapbox map with your custom style...");
       console.log("Container element:", document.getElementById("mapbox-map"));
       
       try {
         mapboxMap = new mapboxgl.Map({
           container: "mapbox-map",
-          style: {
-            "version": 8,
-            "sources": {
-              "osm": {
-                "type": "raster",
-                "tiles": [
-                  "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                ],
-                "tileSize": 256,
-                "attribution": "© OpenStreetMap contributors"
-              }
-            },
-            "layers": [
-              {
-                "id": "osm",
-                "type": "raster",
-                "source": "osm"
-              }
-            ]
-          },
+          style: "mapbox://styles/furieromane/cmeeejl8900iu01s62io48hha",
           center: [12.4964, 41.9028],
           zoom: 11
         });
